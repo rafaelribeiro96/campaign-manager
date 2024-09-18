@@ -9,7 +9,6 @@ import styles from './newCampaign.module.css';
 
 const NewCampaignForm: React.FC = () => {
   const [name, setName] = useState('');
-  const [status, setStatus] = useState('ativa');
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [category, setCategory] = useState('');
@@ -43,11 +42,9 @@ const NewCampaignForm: React.FC = () => {
 
     setError('');
 
-    const status = endDate < today ? 'expirada' : 'ativa';
-
     const newCampaign = {
       name,
-      status,
+      status: 'ativa',
       startDate,
       endDate,
       category,
@@ -69,6 +66,16 @@ const NewCampaignForm: React.FC = () => {
     <Layout>
       <div className={styles.formContainer}>
         <h2>Criar Nova Campanha</h2>
+
+        <div className={styles.observations}>
+          <p>Regras para criar uma campanha:</p>
+          <ul>
+            <li>A data de início não pode ser menor que a data atual.</li>
+            <li>A data de fim deve ser maior que a data de início.</li>
+            <li>O status será automaticamente definido como "ativa".</li>
+          </ul>
+        </div>
+
         <form onSubmit={handleSubmit}>
           <div>
             <label>Nome:</label>
@@ -81,7 +88,7 @@ const NewCampaignForm: React.FC = () => {
           </div>
           <div>
             <label>Status:</label>
-            <select value={status} disabled onChange={(e) => setStatus(e.target.value)}>
+            <select value="ativa" disabled>
               <option value="ativa">Ativa</option>
             </select>
           </div>
@@ -113,14 +120,16 @@ const NewCampaignForm: React.FC = () => {
             </select>
           </div>
           {error && <p className={styles.error}>{error}</p>}
-          <button type="submit">Criar Campanha</button>
-          <button
-            type="button"
-            className={styles.cancelButton}
-            onClick={handleCancel}
-          >
-            Cancelar
-          </button>
+
+          {/* Botões com alinhamento */}
+          <div className={styles.buttonsContainer}>
+            <button type="button" className={styles.cancelButton} onClick={handleCancel}>
+              Cancelar
+            </button>
+            <button type="submit" className={styles.newCampaignButton}>
+              Criar Campanha
+            </button>
+          </div>
         </form>
       </div>
     </Layout>

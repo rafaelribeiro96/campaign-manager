@@ -15,9 +15,16 @@
 }
 
 .campaignList {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+  display: grid;
+  gap: 40px;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  padding: 20px;
+}
+
+@media (max-width: 768px) {
+  .campaignList {
+    grid-template-columns: 1fr;
+  }
 }
 
 .backButton {
@@ -39,7 +46,7 @@
   padding: 10px 20px;
   font-size: 1rem;
   color: #fff;
-  background-color: #28a745;
+  background-color: #565a88;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -47,6 +54,6 @@
 }
 
 .newCampaignButton:hover {
-  background-color: #218838;
+  background-color: #3b4294;
 }
 

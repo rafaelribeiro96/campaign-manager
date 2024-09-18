@@ -2,14 +2,17 @@
 
 import React, { useEffect, useState } from 'react';
 import { useRouter, useParams } from 'next/navigation';
-import {
-  getCampaignById,
-  updateCampaign,
-  deleteCampaign,
-} from '../../../services/campaignService';
+import { getCampaignById, updateCampaign, deleteCampaign } from '../../../services/campaignService';
 import { getCategories } from '../../../services/categoryService';
 import Layout from '../../../components/Layout';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
+import SaveIcon from '@mui/icons-material/Save';
+import CancelIcon from '@mui/icons-material/Cancel';
+import PauseIcon from '@mui/icons-material/Pause';
+import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import styles from './campaignDetails.module.css';
+import { ArrowBack } from '@mui/icons-material';
 
 const CampaignDetails: React.FC = () => {
   const { id } = useParams();
@@ -157,97 +160,98 @@ const CampaignDetails: React.FC = () => {
     <Layout>
       <div className={styles.container}>
         <div className={styles.header}>
-          <h2>{isEditing ? 'Editar Campanha' : 'Detalhes da Campanha'}</h2>
           <button className={styles.backButton} onClick={handleBack}>
-            Voltar
+            <ArrowBack />
           </button>
+          <h2>{isEditing ? 'Editar Campanha' : 'Detalhes da Campanha'}</h2>
+          <div></div>
         </div>
-        <div className={styles.formContainer}>
-          <form onSubmit={handleUpdate}>
-            <label>
-              Nome:
-              <input
-                type="text"
-                name="name"
-                value={name}
-                disabled={!isEditing}
-                onChange={handleInputChange}
-              />
-            </label>
-            <label>
-              Status:
-              <input
-                type="text"
-                name="status"
-                value={status}
-                disabled
-              />
-            </label>
-            <label>
-              Data de Início:
-              <input
-                type="date"
-                name="startDate"
-                value={startDate}
-                disabled={!isEditing}
-                onChange={handleInputChange}
-              />
-            </label>
-            <label>
-              Data de Fim:
-              <input
-                type="date"
-                name="endDate"
-                value={endDate}
-                disabled={!isEditing}
-                onChange={handleInputChange}
-              />
-            </label>
-            <label>
-              Categoria:
-              <select
-                name="category"
-                value={category}
-                disabled={!isEditing}
-                onChange={handleInputChange}
-                required
-              >
-                <option value="" disabled>Selecione uma categoria</option>
-                {categories.map((cat) => (
-                  <option key={cat.id} value={cat.name}>{cat.name}</option>
-                ))}
-              </select>
-            </label>
-            <div className={styles.actions}>
-              {isEditing ? (
-                <>
-                  <button className={styles.saveButton} type="submit">Salvar</button>
-                  <button className={styles.cancelButton} type="button" onClick={() => setIsEditing(false)}>
-                    Cancelar
+        <form onSubmit={handleUpdate} className={styles.formContainer}>
+          <label>
+            Nome:
+            <input
+              type="text"
+              name="name"
+              value={name}
+              disabled={!isEditing}
+              onChange={handleInputChange}
+              required
+            />
+          </label>
+          <label>
+            Status:
+            <input type="text" name="status" value={status} disabled />
+          </label>
+          <label>
+            Data de Início:
+            <input
+              type="date"
+              name="startDate"
+              value={startDate}
+              disabled={!isEditing}
+              onChange={handleInputChange}
+              required
+            />
+          </label>
+          <label>
+            Data de Fim:
+            <input
+              type="date"
+              name="endDate"
+              value={endDate}
+              disabled={!isEditing}
+              onChange={handleInputChange}
+              required
+            />
+          </label>
+          <label>
+            Categoria:
+            <select
+              name="category"
+              value={category}
+              disabled={!isEditing}
+              onChange={handleInputChange}
+              required
+            >
+              <option value="">Selecione uma categoria</option>
+              {categories.map((cat) => (
+                <option key={cat.id} value={cat.name}>
+                  {cat.name}
+                </option>
+              ))}
+            </select>
+          </label>
+          <div className={styles.actions}>
+            {isEditing ? (
+              <>
+                <button type="submit" aria-label="Salvar" title="Salvar edição">
+                  <SaveIcon style={{ color: '#387e3a' }} />
+                </button>
+                <button type="button" aria-label="Cancelar" title="Cancelar edição" onClick={() => setIsEditing(false)}>
+                  <CancelIcon style={{ color: '#993c35' }} />
+                </button>
+              </>
+            ) : (
+              <>
+                {status === 'ativa' ? (
+                  <button type="button" aria-label="Pausar" title="Pausar campanha" onClick={handlePauseResume}>
+                    <PauseIcon style={{ color: '#100e33' }} />
                   </button>
-                </>
-              ) : (
-                <>
-                  <button className={styles.editButton} type="button" onClick={toggleEditMode}>
-                    Editar
+                ) : (
+                  <button type="button" aria-label="Retomar" title="Retomar campanha" onClick={handlePauseResume}>
+                    <PlayArrowIcon style={{ color: '#387e3a' }} />
                   </button>
-                  <button className={styles.deleteButton} type="button" onClick={handleDelete}>
-                    Excluir
-                  </button>
-                  {status === 'ativa' ? (
-                    <button className={styles.pauseButton} type="button" onClick={handlePauseResume}>
-                      Pausar
-                    </button>
-                  ) : status === 'pausada' ? (
-                    <button className={styles.resumeButton} type="button" onClick={handlePauseResume}>
-                      Continuar
-                    </button>
-                  ) : null}
-                </>
-              )}
-            </div>
-          </form>
-        </div>
+                )}
+                <button type="button" aria-label="Editar" title="Editar campanha" onClick={toggleEditMode}>
+                  <EditIcon style={{ color: '#7c5925' }} />
+                </button>
+                <button type="button" aria-label="Excluir" title="Remover campanha" onClick={handleDelete}>
+                  <DeleteIcon style={{ color: '#993c35' }} />
+                </button>
+              </>
+            )}
+          </div>
+        </form>
       </div>
     </Layout>
   );

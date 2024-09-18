@@ -5,41 +5,49 @@
   justify-content: center;
   height: 100vh;
   padding: 20px;
-  background-color: #f4f4f9;
-  font-family: Arial, sans-serif;
+  background-color: #eef1f7;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .header {
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
+
 }
 
 .header h1 {
-  font-size: 2.5rem;
-  color: #333;
+  font-size: 2.8rem;
+  color: #3b4294;
 }
 
 .header p {
-  font-size: 1.2rem;
-  color: #555;
+  font-size: 1.3rem;
+  color: #4d6475;
 }
 
 .buttonContainer {
   display: flex;
-  gap: 20px;
+  gap: 30px;
+  margin-top: 20px;
 }
 
 .button {
-  padding: 10px 20px;
-  font-size: 1rem;
-  color: #fff;
-  background-color: #007bff;
+  padding: 12px 30px;
+  font-size: 1.1rem;
+  color: #ffffff;
+  background-color: #006bb3;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s ease-in-out;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .button:hover {
-  background-color: #0056b3;
+  background-color: #004e8c;
+}
+
+.button:active {
+  background-color: #003d6b;
+  box-shadow: none;
 }

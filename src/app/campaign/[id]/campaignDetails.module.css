@@ -16,29 +16,12 @@
   color: #333;
 }
 
-.header button {
-  padding: 10px 20px;
-  font-size: 1rem;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.header .backButton {
-  background-color: #6c757d;
-}
-
-.header .backButton:hover {
-  background-color: #5a6268;
-}
-
 .formContainer {
   background-color: #fff;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  position: relative;
 }
 
 .formContainer label {
@@ -57,65 +40,41 @@
   margin-bottom: 15px;
 }
 
-.formContainer .actions {
+.actions {
   display: flex;
-  gap: 10px;
+  justify-content: space-evenly;
+  margin-top: 20px;
 }
 
-.formContainer .actions button {
-  padding: 10px 20px;
-  font-size: 1rem;
-  color: #fff;
+.actions button {
+  background-color: transparent;
   border: none;
-  border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  font-size: 2rem;
+  transition: color 0.3s;
+}
+.actions button svg {
+  font-size: 2rem;
 }
 
-.formContainer .saveButton {
-  background-color: #28a745;
+.actions button:hover {
+  transform: scale(1.1);
+  opacity: 0.9;
 }
 
-.formContainer .saveButton:hover {
-  background-color: #218838;
+.backButton {
+  font-size: 2rem;
+  color: #13134d;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
 }
 
-.formContainer .cancelButton {
-  background-color: #dc3545;
+.backButton:hover {
+  transform: scale(1.1);
+  opacity: 0.9;
 }
 
-.formContainer .cancelButton:hover {
-  background-color: #c82333;
-}
-
-.formContainer .editButton {
-  background-color: #007bff;
-}
-
-.formContainer .editButton:hover {
-  background-color: #0056b3;
-}
-
-.formContainer .deleteButton {
-  background-color: #dc3545;
-}
-
-.formContainer .deleteButton:hover {
-  background-color: #c82333;
-}
-
-.formContainer .pauseButton {
-  background-color: #ffc107;
-}
-
-.formContainer .pauseButton:hover {
-  background-color: #e0a800;
-}
-
-.formContainer .resumeButton {
-  background-color: #28a745;
-}
-
-.formContainer .resumeButton:hover {
-  background-color: #218838;
+.backButton svg {
+  font-size: 2rem;
 }

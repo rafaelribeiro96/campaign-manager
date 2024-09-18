@@ -52,5 +52,14 @@
     "category": "Vendas",
     "createdAt": "2024-09-18T19:02:10.993Z",
     "id": "6"
+  },
+  {
+    "name": "Campanha Primavera-Verão",
+    "status": "ativa",
+    "startDate": "2024-09-18",
+    "endDate": "2024-09-30",
+    "category": "Vendas",
+    "createdAt": "2024-09-18T20:34:36.895Z",
+    "id": "7"
   }
 ]

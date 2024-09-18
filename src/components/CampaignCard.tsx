@@ -1,5 +1,6 @@
 import React from 'react';
 import { format, parseISO } from 'date-fns';
+import Styles from './campaignCard.module.css';
 
 type Campaign = {
   id: string;
@@ -22,21 +23,19 @@ const CampaignCard: React.FC<CampaignCardProps> = ({ campaign, onClick }) => {
     : 'Data não disponível';
 
   return (
-    <div
-      style={{
-        border: '1px solid #ccc',
-        padding: '10px',
-        marginBottom: '10px',
-        cursor: 'pointer',
-      }}
-      onClick={onClick}
-    >
-      <h3>{campaign.name}</h3>
-      <p>Status: {campaign.status}</p>
-      <p>Início: {format(parseISO(campaign.startDate), 'dd/MM/yyyy')}</p>
-      <p>Fim: {format(parseISO(campaign.endDate), 'dd/MM/yyyy')}</p>
-      <p>Criado em: {formattedCreatedAt}</p>
-      <p>Categoria: {campaign.category}</p>
+    <div className={Styles.cardContainer} onClick={onClick}>
+      <div className={Styles.cardHeader}>
+        <h3 className={Styles.cardTitle}>{campaign.name}</h3>
+        <span className={`${Styles.status} ${Styles[campaign.status.toLowerCase()]}`}>
+          {campaign.status}
+        </span>
+      </div>
+      <div className={Styles.cardContent}>
+        <p><strong>Início:</strong> {format(parseISO(campaign.startDate), 'dd/MM/yyyy')}</p>
+        <p><strong>Fim:</strong> {format(parseISO(campaign.endDate), 'dd/MM/yyyy')}</p>
+        <p><strong>Categoria:</strong> {campaign.category}</p>
+        <p><strong>Criada em:</strong> {formattedCreatedAt}</p>
+      </div>
     </div>
   );
 };

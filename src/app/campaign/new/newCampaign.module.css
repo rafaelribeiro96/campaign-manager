@@ -32,6 +32,23 @@
   border-radius: 5px;
 }
 
+.formContainer .observations {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 15px;
+}
+
+.formContainer .observations ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.formContainer .buttonsContainer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
 .formContainer button {
   padding: 10px 20px;
   font-size: 1rem;
@@ -47,26 +64,19 @@
   background-color: #0056b3;
 }
 
-.formContainer button.cancelButton {
+.formContainer .cancelButton {
   background-color: #6c757d;
 }
 
-.formContainer button.cancelButton:hover {
+.formContainer .cancelButton:hover {
   background-color: #5a6268;
 }
 
-.newCampaignButton {
-  padding: 10px 20px;
-  font-size: 1rem;
-  color: #fff;
+.formContainer .newCampaignButton {
   background-color: #28a745;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s;
 }
 
-.newCampaignButton:hover {
+.formContainer .newCampaignButton:hover {
   background-color: #218838;
 }
 
