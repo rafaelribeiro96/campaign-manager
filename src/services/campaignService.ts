@@ -63,10 +63,6 @@ export const updateCampaign = async (id: string, data: any) => {
   return response.json();
 };
 
-
-
-
-
 export const deleteCampaign = async (id: string) => {
   const response = await fetch(`/api/campaign/${id}`, {
     method: 'DELETE',

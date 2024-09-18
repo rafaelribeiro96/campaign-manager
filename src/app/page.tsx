@@ -1,11 +1,25 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from './page.module.css';
 
 const HomePage: React.FC = () => {
   const router = useRouter();
+
+  useEffect(() => {
+    const checkExpiredCampaigns = async () => {
+      try {
+        const response = await fetch('/api/verifyExpiredCampaigns');
+        const result = await response.json();
+        console.log(result.message || result.error);
+      } catch (error) {
+        console.error('Erro ao verificar campanhas expiradas:', error);
+      }
+    };
+
+    checkExpiredCampaigns();
+  }, []);
 
   const handleNavigate = (path: string) => {
     router.push(path);

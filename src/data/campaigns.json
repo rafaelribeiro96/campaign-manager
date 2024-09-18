@@ -11,9 +11,9 @@
   {
     "id": "2",
     "name": "Campanha de Inverno",
-    "status": "pausada",
+    "status": "expirada",
     "startDate": "2023-06-01",
-    "endDate": "2024-09-25",
+    "endDate": "2024-07-25",
     "createdAt": "2023-06-01T10:20:00Z",
     "category": "Marketing"
   },
@@ -29,9 +29,9 @@
   {
     "id": "4",
     "name": "Campanha de Primavera",
-    "status": "ativa",
-    "startDate": "2024-12-01",
-    "endDate": "2024-12-31",
+    "status": "expirada",
+    "startDate": "2024-01-01",
+    "endDate": "2024-08-31",
     "createdAt": "2024-12-01T14:45:00Z",
     "category": "Operações"
   },
@@ -43,5 +43,14 @@
     "category": "Marketing",
     "createdAt": "2024-09-18T17:56:02.688Z",
     "id": "5"
+  },
+  {
+    "name": "Campanha Venda de Site",
+    "status": "ativa",
+    "startDate": "2024-10-01",
+    "endDate": "2024-10-10",
+    "category": "Vendas",
+    "createdAt": "2024-09-18T19:02:10.993Z",
+    "id": "6"
   }
 ]
