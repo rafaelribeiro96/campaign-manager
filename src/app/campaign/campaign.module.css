@@ -18,7 +18,7 @@
   display: grid;
   gap: 40px;
   grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-  padding: 20px;
+  padding: 20px 0;
 }
 
 @media (max-width: 768px) {
@@ -57,3 +57,91 @@
   background-color: #3b4294;
 }
 
+.filterContainer {
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #f9f9f9;
+}
+
+.filterButton {
+  padding: 12px 24px;
+  font-size: 1rem;
+  background-color: #565a88;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.filterButton:hover {
+  background-color: #3b4294;
+  transform: scale(1.05);
+}
+
+.filterForm {
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.filterForm label {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.filterForm select,
+.filterForm input {
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-top: 5px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.filterForm select:focus,
+.filterForm input:focus {
+  border-color: #565a88;
+  box-shadow: 0 0 5px rgba(86, 90, 136, 0.3);
+  outline: none;
+}
+
+.applyFilterButton {
+  padding: 12px 24px;
+  font-size: 1rem;
+  background-color: #015f17;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.applyFilterButton:hover {
+  background-color: #002909;
+  transform: scale(1.01);
+}
+
+@media (min-width: 768px) {
+  .filterForm {
+    flex-direction: row;
+    align-items: flex-end;
+    gap: 20px;
+  }
+
+  .filterForm label {
+    flex: 1;
+  }
+
+  .applyFilterButton {
+    flex-shrink: 0;
+    margin-left: auto;
+  }
+}
