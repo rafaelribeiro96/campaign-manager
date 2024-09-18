@@ -57,36 +57,27 @@
   background-color: #3b4294;
 }
 
+.filterAndSortContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 40px;
+}
+
 .filterContainer {
   margin-bottom: 20px;
-  padding: 10px;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  background-color: #f9f9f9;
-}
-
-.filterButton {
-  padding: 12px 24px;
-  font-size: 1rem;
-  background-color: #565a88;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.filterButton:hover {
-  background-color: #3b4294;
-  transform: scale(1.05);
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
 }
 
 .filterForm {
-  margin-top: 15px;
   display: flex;
-  flex-direction: column;
-  gap: 15px;
+  flex-direction: row;
+  align-items: flex-end;
+  gap: 10px;
 }
 
 .filterForm label {
@@ -98,12 +89,14 @@
 
 .filterForm select,
 .filterForm input {
-  padding: 10px;
-  font-size: 1rem;
+  margin-top: 8px;
+  padding: 8px;
+  font-size: 14px;
+  border-radius: 4px;
   border: 1px solid #ccc;
-  border-radius: 5px;
-  margin-top: 5px;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  background-color: #fff;
+  color: #333;
+  transition: border-color 0.2s ease-in-out;
 }
 
 .filterForm select:focus,
@@ -114,9 +107,9 @@
 }
 
 .applyFilterButton {
-  padding: 12px 24px;
-  font-size: 1rem;
-  background-color: #015f17;
+  padding: 10px 20px;
+  font-size: 0.9rem;
+  background-color: #565a88;
   color: white;
   border: none;
   border-radius: 8px;
@@ -125,23 +118,98 @@
 }
 
 .applyFilterButton:hover {
-  background-color: #002909;
+  background-color: #3b4294;
   transform: scale(1.01);
 }
 
-@media (min-width: 768px) {
+.sortContainer {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 20px;
+  width: 40%;
+  min-height: 80px;
+}
+
+.sortContainer label {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.9rem;
+  color: #333;
+  margin-right: 20px;
+}
+
+.sortContainer select {
+  margin-top: 8px;
+  padding: 8px;
+  font-size: 14px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  color: #333;
+  transition: border-color 0.2s ease-in-out;
+}
+
+.sortContainer select:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.sortContainer select option {
+  font-size: 14px;
+}
+
+.sortContainer button {
+  padding: 10px 20px;
+  font-size: 14px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.sortContainer button:hover {
+  background-color: #0056b3;
+}
+
+@media (max-width: 728px) {
+  .campaignList {
+    gap: 10px;
+  }
+
+  .filterContainer {
+    width: 100%;
+    margin-bottom: 10px;
+    min-height: auto;
+  }
+
   .filterForm {
-    flex-direction: row;
     align-items: flex-end;
-    gap: 20px;
+    width: 100%;
+    gap: 10px;
   }
 
   .filterForm label {
-    flex: 1;
+    width: 100%;
   }
 
-  .applyFilterButton {
-    flex-shrink: 0;
-    margin-left: auto;
+  .sortContainer {
+    width: 100%;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 0px;
+    min-height: auto;
   }
+
+  .sortContainer label {
+    width: 100%;
+  }
+
+  .filterAndSortContainer {
+    flex-direction: column;
+    gap: 20px;
+  }
+  
 }

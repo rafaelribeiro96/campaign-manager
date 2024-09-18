@@ -23,9 +23,10 @@ const CampaignList: React.FC = () => {
   const [categories, setCategories] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [showFilter, setShowFilter] = useState(false);
   const [selectedStatus, setSelectedStatus] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
+  const [sortOption, setSortOption] = useState('');
+  const [sortDirection, setSortDirection] = useState('asc');
   const router = useRouter();
 
   useEffect(() => {
@@ -61,8 +62,46 @@ const CampaignList: React.FC = () => {
       const categoryMatches = selectedCategory ? campaign.category === selectedCategory : true;
       return statusMatches && categoryMatches;
     });
+
     setFilteredCampaigns(filtered);
   };
+
+  const sortCampaigns = (campaignsToSort: Campaign[]) => {
+    return [...campaignsToSort].sort((a, b) => {
+      let fieldA, fieldB;
+      switch (sortOption) {
+        case 'startDate':
+          fieldA = new Date(a.startDate).getTime();
+          fieldB = new Date(b.startDate).getTime();
+          break;
+        case 'endDate':
+          fieldA = new Date(a.endDate).getTime();
+          fieldB = new Date(b.endDate).getTime();
+          break;
+        case 'createdAt':
+          fieldA = new Date(a.createdAt).getTime();
+          fieldB = new Date(b.createdAt).getTime();
+          break;
+        case 'category':
+          fieldA = a.category.toLowerCase();
+          fieldB = b.category.toLowerCase();
+          break;
+        default:
+          return 0;
+      }
+
+      if (sortDirection === 'asc') {
+        return fieldA > fieldB ? 1 : -1;
+      } else {
+        return fieldA < fieldB ? 1 : -1;
+      }
+    });
+  };
+
+  useEffect(() => {
+    const sortedCampaigns = sortCampaigns(filteredCampaigns);
+    setFilteredCampaigns(sortedCampaigns);
+  }, [sortOption, sortDirection]);
 
   const handleCampaignClick = (id: string) => {
     router.push(`/campaign/${id}`);
@@ -70,15 +109,32 @@ const CampaignList: React.FC = () => {
 
   return (
     <div>
-      <div className={styles.filterContainer}>
-        <button onClick={() => setShowFilter(!showFilter)} className={styles.filterButton}>
-          {showFilter ? 'Fechar Filtros' : 'Filtrar'}
-        </button>
+      <div className={styles.filterAndSortContainer}>
+        <div className={styles.sortContainer}>
+          <label>
+            Ordenar por:
+            <select value={sortOption} onChange={(e) => setSortOption(e.target.value)}>
+              <option value="">Selecione</option>
+              <option value="startDate">Data de Início</option>
+              <option value="endDate">Data de Fim</option>
+              <option value="createdAt">Criada em</option>
+              <option value="category">Categoria</option>
+            </select>
+          </label>
 
-        {showFilter && (
+          <label>
+            Direção:
+            <select value={sortDirection} onChange={(e) => setSortDirection(e.target.value)}>
+              <option value="asc">Crescente</option>
+              <option value="desc">Decrescente</option>
+            </select>
+          </label>
+        </div>
+
+        <div className={styles.filterContainer}>
           <div className={styles.filterForm}>
             <label>
-              Status:
+              Filtrar status:
               <select value={selectedStatus} onChange={(e) => setSelectedStatus(e.target.value)}>
                 <option value="">Todos</option>
                 <option value="ativa">Ativa</option>
@@ -88,7 +144,7 @@ const CampaignList: React.FC = () => {
             </label>
 
             <label>
-              Categoria:
+              Filtrar categoria:
               <select value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)}>
                 <option value="">Todas</option>
                 {categories.map((category) => (
@@ -100,10 +156,12 @@ const CampaignList: React.FC = () => {
             </label>
 
             <button onClick={applyFilter} className={styles.applyFilterButton}>
-              Aplicar Filtro
+              Filtrar
             </button>
           </div>
-        )}
+        </div>
+
+
       </div>
 
       <div className={styles.campaignList}>
