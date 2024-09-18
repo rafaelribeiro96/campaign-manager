@@ -29,25 +29,47 @@ const HomePage: React.FC = () => {
     <div className={styles.container}>
       <header className={styles.header}>
         <h1>Bem-vindo ao Gerenciador de Campanhas</h1>
-        <p>
-          Gerencie suas campanhas de forma fácil e eficiente com nossa
-          aplicação.
-        </p>
+        <p>Gerencie suas campanhas de forma fácil e eficiente com nossa aplicação.</p>
+        <div className={styles.buttonContainer}>
+          <button className={styles.button} onClick={() => handleNavigate('/campaign')}>
+            Gerenciar Campanhas
+          </button>
+          {/* <button className={styles.button} onClick={() => handleNavigate('/campaign/new')}>
+            Criar Nova Campanha
+          </button> */}
+        </div>
       </header>
-      <div className={styles.buttonContainer}>
-        <button
-          className={styles.button}
-          onClick={() => handleNavigate('/campaign')}
-        >
-          Gerenciar Campanhas
-        </button>
-        <button
-          className={styles.button}
-          onClick={() => handleNavigate('/campaign/new')}
-        >
-          Criar Nova Campanha
-        </button>
-      </div>
+      <img src="/images/bannersite.avif" alt="Campaign Manager Banner" className={styles.bannerImage} />
+      <section className={styles.highlights}>
+        <div className={styles.highlightItem}>
+          <h2>Fácil de Usar</h2>
+          <p>Uma interface intuitiva para gerenciar suas campanhas sem complicações.</p>
+        </div>
+        <div className={styles.highlightItem}>
+          <h2>Relatórios Detalhados</h2>
+          <p>Obtenha relatórios detalhados sobre o desempenho das suas campanhas.</p>
+        </div>
+        <div className={styles.highlightItem}>
+          <h2>Suporte Dedicado</h2>
+          <p>Nosso suporte está sempre disponível para ajudar com suas necessidades.</p>
+        </div>
+      </section>
+      <section className={styles.testimonials}>
+        <h2>O que nossos usuários dizem</h2>
+        <div className={styles.testimonialItem}>
+          <blockquote>
+            <p>"Uma ferramenta essencial para nossa equipe de marketing. Muito fácil de usar!"</p>
+            <footer>- João Silva, Marketing Manager</footer>
+          </blockquote>
+        </div>
+        <div className={styles.testimonialItem}>
+          <blockquote>
+            <p>"Excelente plataforma com ótimos recursos para gerenciar campanhas."</p>
+            <footer>- Maria Oliveira, CEO</footer>
+          </blockquote>
+        </div>
+      </section>
+
     </div>
   );
 };
