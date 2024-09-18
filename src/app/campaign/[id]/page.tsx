@@ -7,6 +7,7 @@ import {
   updateCampaign,
   deleteCampaign,
 } from '../../../services/campaignService';
+import { getCategories } from '../../../services/categoryService';
 import Layout from '../../../components/Layout';
 import styles from './campaignDetails.module.css';
 
@@ -18,40 +19,101 @@ const CampaignDetails: React.FC = () => {
   const [status, setStatus] = useState('ativa');
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
+  const [category, setCategory] = useState('');
+  const [categories, setCategories] = useState<{ id: number; name: string }[]>([]);
   const [isEditing, setIsEditing] = useState(false);
   const [isFormDirty, setIsFormDirty] = useState(false);
 
   useEffect(() => {
-    if (id) {
-      const fetchData = async () => {
+    const fetchData = async () => {
+      if (id) {
         const data = await getCampaignById(id as string);
-        setCampaign(data);
         if (data) {
+          const today = new Date().toISOString().split('T')[0];
+          const isExpired = data.endDate < today ? 'expirada' : data.status;
+          setCampaign({
+            ...data,
+            status: isExpired,
+          });
           setName(data.name);
-          setStatus(data.status);
+          setStatus(isExpired);
           setStartDate(data.startDate);
           setEndDate(data.endDate);
+          setCategory(data.category);
         }
-      };
-      fetchData();
-    }
+      }
+    };
+    fetchData();
   }, [id]);
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      const categories = await getCategories();
+      setCategories(categories);
+    };
+
+    fetchCategories();
+  }, []);
+
+  useEffect(() => {
+    const today = new Date().toISOString().split('T')[0];
+
+    if (endDate) {
+      let updatedStatus = status;
+
+      if (endDate < today) {
+        updatedStatus = 'expirada';
+      } else if (endDate >= today) {
+        if (status === 'expirada') {
+          updatedStatus = 'ativa';
+        }
+      }
+
+      setStatus(updatedStatus);
+    }
+  }, [endDate, status]);
 
   const handleUpdate = async (e: React.FormEvent) => {
     e.preventDefault();
     if (isFormDirty) {
+      const today = new Date().toISOString().split('T')[0];
+      const updatedStatus = endDate < today ? 'expirada' : status;
+
       const updatedCampaign = {
         id: id as string,
         name,
-        status,
+        status: updatedStatus,
         startDate,
         endDate,
+        category,
       };
 
       await updateCampaign(updatedCampaign.id, updatedCampaign);
       setIsEditing(false);
       setIsFormDirty(false);
     }
+  };
+
+  const handlePauseResume = async () => {
+    const today = new Date().toISOString().split('T')[0];
+    let updatedStatus = status === 'ativa' ? 'pausada' : 'ativa';
+
+    if (endDate < today) {
+      updatedStatus = 'expirada';
+    }
+
+    const updatedCampaign = {
+      id: id as string,
+      name,
+      status: updatedStatus,
+      startDate,
+      endDate,
+      category,
+    };
+
+    await updateCampaign(updatedCampaign.id, updatedCampaign);
+    setCampaign({ ...campaign, status: updatedStatus });
+    setStatus(updatedStatus);
   };
 
   const handleDelete = async () => {
@@ -75,14 +137,14 @@ const CampaignDetails: React.FC = () => {
       case 'name':
         setName(e.target.value);
         break;
-      case 'status':
-        setStatus(e.target.value);
-        break;
       case 'startDate':
         setStartDate(e.target.value);
         break;
       case 'endDate':
         setEndDate(e.target.value);
+        break;
+      case 'category':
+        setCategory(e.target.value);
         break;
       default:
         break;
@@ -102,82 +164,88 @@ const CampaignDetails: React.FC = () => {
         </div>
         <div className={styles.formContainer}>
           <form onSubmit={handleUpdate}>
-            <div>
-              <label>Nome:</label>
+            <label>
+              Nome:
               <input
                 type="text"
                 name="name"
                 value={name}
-                onChange={handleInputChange}
-                required
                 disabled={!isEditing}
+                onChange={handleInputChange}
               />
-            </div>
-            <div>
-              <label>Status:</label>
-              <select
+            </label>
+            <label>
+              Status:
+              <input
+                type="text"
                 name="status"
                 value={status}
-                onChange={handleInputChange}
-                disabled={!isEditing}
-              >
-                <option value="ativa">Ativa</option>
-                <option value="expirada">Expirada</option>
-              </select>
-            </div>
-            <div>
-              <label>Data de Início:</label>
+                disabled
+              />
+            </label>
+            <label>
+              Data de Início:
               <input
                 type="date"
                 name="startDate"
                 value={startDate}
-                onChange={handleInputChange}
-                required
                 disabled={!isEditing}
+                onChange={handleInputChange}
               />
-            </div>
-            <div>
-              <label>Data de Fim:</label>
+            </label>
+            <label>
+              Data de Fim:
               <input
                 type="date"
                 name="endDate"
                 value={endDate}
+                disabled={!isEditing}
+                onChange={handleInputChange}
+              />
+            </label>
+            <label>
+              Categoria:
+              <select
+                name="category"
+                value={category}
+                disabled={!isEditing}
                 onChange={handleInputChange}
                 required
-                disabled={!isEditing}
-              />
+              >
+                <option value="" disabled>Selecione uma categoria</option>
+                {categories.map((cat) => (
+                  <option key={cat.id} value={cat.name}>{cat.name}</option>
+                ))}
+              </select>
+            </label>
+            <div className={styles.actions}>
+              {isEditing ? (
+                <>
+                  <button className={styles.saveButton} type="submit">Salvar</button>
+                  <button className={styles.cancelButton} type="button" onClick={() => setIsEditing(false)}>
+                    Cancelar
+                  </button>
+                </>
+              ) : (
+                <>
+                  <button className={styles.editButton} type="button" onClick={toggleEditMode}>
+                    Editar
+                  </button>
+                  <button className={styles.deleteButton} type="button" onClick={handleDelete}>
+                    Excluir
+                  </button>
+                  {status === 'ativa' ? (
+                    <button className={styles.pauseButton} type="button" onClick={handlePauseResume}>
+                      Pausar
+                    </button>
+                  ) : status === 'pausada' ? (
+                    <button className={styles.resumeButton} type="button" onClick={handlePauseResume}>
+                      Continuar
+                    </button>
+                  ) : null}
+                </>
+              )}
             </div>
-            {isEditing ? (
-              <>
-                <button type="submit" className={styles.saveButton}>
-                  Salvar Alterações
-                </button>
-                <button
-                  type="button"
-                  className={styles.cancelButton}
-                  onClick={() => setIsEditing(false)}
-                >
-                  Cancelar
-                </button>
-              </>
-            ) : (
-              <>
-                <button
-                  type="button"
-                  className={styles.editButton}
-                  onClick={toggleEditMode}
-                >
-                  Editar
-                </button>
-                <button
-                  type="button"
-                  className={styles.deleteButton}
-                  onClick={handleDelete}
-                >
-                  Excluir Campanha
-                </button>
-              </>
-            )}
           </form>
         </div>
       </div>

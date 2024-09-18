@@ -6,6 +6,9 @@
 
 .header {
   margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .header h2 {
@@ -13,15 +16,29 @@
   color: #333;
 }
 
+.header button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.header .backButton {
+  background-color: #6c757d;
+}
+
+.header .backButton:hover {
+  background-color: #5a6268;
+}
+
 .formContainer {
   background-color: #fff;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.formContainer div {
-  margin-bottom: 15px;
 }
 
 .formContainer label {
@@ -37,9 +54,15 @@
   font-size: 1rem;
   border: 1px solid #ccc;
   border-radius: 5px;
+  margin-bottom: 15px;
 }
 
-.formContainer button {
+.formContainer .actions {
+  display: flex;
+  gap: 10px;
+}
+
+.formContainer .actions button {
   padding: 10px 20px;
   font-size: 1rem;
   color: #fff;
@@ -49,44 +72,50 @@
   transition: background-color 0.3s;
 }
 
-.editButton {
-  background-color: #007bff;
-}
-
-.editButton:hover {
-  background-color: #0056b3;
-}
-
-.saveButton {
+.formContainer .saveButton {
   background-color: #28a745;
 }
 
-.saveButton:hover {
+.formContainer .saveButton:hover {
   background-color: #218838;
 }
 
-.cancelButton {
-  background-color: #6c757d;
-}
-
-.cancelButton:hover {
-  background-color: #5a6268;
-}
-
-.deleteButton {
-  margin-top: 10px;
+.formContainer .cancelButton {
   background-color: #dc3545;
 }
 
-.deleteButton:hover {
+.formContainer .cancelButton:hover {
   background-color: #c82333;
 }
 
-.backButton {
-  margin-top: 20px;
-  background-color: #6c757d;
+.formContainer .editButton {
+  background-color: #007bff;
 }
 
-.backButton:hover {
-  background-color: #5a6268;
+.formContainer .editButton:hover {
+  background-color: #0056b3;
+}
+
+.formContainer .deleteButton {
+  background-color: #dc3545;
+}
+
+.formContainer .deleteButton:hover {
+  background-color: #c82333;
+}
+
+.formContainer .pauseButton {
+  background-color: #ffc107;
+}
+
+.formContainer .pauseButton:hover {
+  background-color: #e0a800;
+}
+
+.formContainer .resumeButton {
+  background-color: #28a745;
+}
+
+.formContainer .resumeButton:hover {
+  background-color: #218838;
 }

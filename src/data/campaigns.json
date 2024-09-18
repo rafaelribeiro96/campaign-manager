@@ -2,36 +2,46 @@
   {
     "id": "1",
     "name": "Campanha de Verão",
-    "status": "ativa",
+    "status": "pausada",
     "startDate": "2024-01-01",
-    "endDate": "2024-01-31"
+    "endDate": "2024-11-30",
+    "createdAt": "2024-01-01T13:00:00Z",
+    "category": "Marketing"
   },
   {
     "id": "2",
     "name": "Campanha de Inverno",
-    "status": "expirada",
+    "status": "pausada",
     "startDate": "2023-06-01",
-    "endDate": "2023-06-30"
+    "endDate": "2024-09-25",
+    "createdAt": "2023-06-01T10:20:00Z",
+    "category": "Marketing"
   },
   {
     "id": "3",
     "name": "Campanha de Outono",
-    "status": "ativa",
+    "status": "expirada",
     "startDate": "2023-09-01",
-    "endDate": "2023-09-30"
+    "endDate": "2023-10-30",
+    "createdAt": "2023-09-01T12:30:00Z",
+    "category": "Tecnologia"
   },
   {
     "id": "4",
     "name": "Campanha de Primavera",
     "status": "ativa",
-    "startDate": "2023-12-01",
-    "endDate": "2023-12-31"
+    "startDate": "2024-12-01",
+    "endDate": "2024-12-31",
+    "createdAt": "2024-12-01T14:45:00Z",
+    "category": "Operações"
   },
   {
-    "id": "5",
-    "name": "Campanha anual",
+    "name": "Campanha teste",
     "status": "ativa",
-    "startDate": "2025-01-01",
-    "endDate": "2025-01-31"
+    "startDate": "2024-01-01",
+    "endDate": "2024-10-31",
+    "category": "Marketing",
+    "createdAt": "2024-09-18T17:56:02.688Z",
+    "id": "5"
   }
 ]

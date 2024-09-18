@@ -98,3 +98,11 @@
 .backButton:hover {
   background-color: #5a6268;
 }
+
+.formContainer button.cancelButton {
+  background-color: #6c757d;
+}
+
+.formContainer button.cancelButton:hover {
+  background-color: #5a6268;
+}

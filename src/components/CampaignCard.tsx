@@ -7,6 +7,8 @@ type Campaign = {
   status: string;
   startDate: string;
   endDate: string;
+  createdAt?: string;
+  category: string;
 };
 
 type CampaignCardProps = {
@@ -15,6 +17,10 @@ type CampaignCardProps = {
 };
 
 const CampaignCard: React.FC<CampaignCardProps> = ({ campaign, onClick }) => {
+  const formattedCreatedAt = campaign.createdAt
+    ? format(parseISO(campaign.createdAt), 'dd/MM/yyyy HH:mm')
+    : 'Data não disponível';
+
   return (
     <div
       style={{
@@ -29,6 +35,8 @@ const CampaignCard: React.FC<CampaignCardProps> = ({ campaign, onClick }) => {
       <p>Status: {campaign.status}</p>
       <p>Início: {format(parseISO(campaign.startDate), 'dd/MM/yyyy')}</p>
       <p>Fim: {format(parseISO(campaign.endDate), 'dd/MM/yyyy')}</p>
+      <p>Criado em: {formattedCreatedAt}</p>
+      <p>Categoria: {campaign.category}</p>
     </div>
   );
 };

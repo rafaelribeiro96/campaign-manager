@@ -12,20 +12,31 @@ interface Campaign {
   status: string;
   startDate: string;
   endDate: string;
+  createdAt: string;
+  category: string;
 }
 
 const CampaignList: React.FC = () => {
   const [campaigns, setCampaigns] = useState<Campaign[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const router = useRouter();
 
   useEffect(() => {
     const fetchCampaigns = async () => {
-      const campaignsData = await getCampaigns();
-      setCampaigns(campaignsData);
+      try {
+        const campaignsData = await getCampaigns();
+        setCampaigns(campaignsData);
+      } catch (err) {
+        setError('Não foi possível carregar as campanhas.');
+      } finally {
+        setLoading(false);
+      }
     };
 
     fetchCampaigns();
   }, []);
+
 
   const handleCampaignClick = (id: string) => {
     router.push(`/campaign/${id}`);
@@ -33,7 +44,11 @@ const CampaignList: React.FC = () => {
 
   return (
     <div className={styles.campaignList}>
-      {campaigns.length > 0 ? (
+      {loading ? (
+        <p>Carregando campanhas...</p>
+      ) : error ? (
+        <p>{error}</p>
+      ) : campaigns.length > 0 ? (
         campaigns.map((campaign) => (
           <CampaignCard
             key={campaign.id}

@@ -25,13 +25,26 @@ export async function PUT(request: Request) {
   const index = campaigns.findIndex((campaign) => campaign.id === id);
 
   if (index !== -1) {
-    campaigns[index] = { ...campaigns[index], ...updateData };
+    const today = new Date().toISOString().split('T')[0];
+    let updatedStatus = updateData.status;
+
+    if (updateData.endDate < today) {
+      updatedStatus = 'expirada';
+    } else if (updateData.status === 'pausada' && updateData.endDate >= today) {
+      updatedStatus = 'pausada';
+    } else if (updateData.status === 'ativa' && updateData.endDate >= today) {
+      updatedStatus = 'ativa';
+    }
+
+    campaigns[index] = { ...campaigns[index], ...updateData, status: updatedStatus };
     await writeDataToFile(campaigns);
     return NextResponse.json(campaigns[index]);
   } else {
     return NextResponse.json({ error: 'Campaign not found' }, { status: 404 });
   }
 }
+
+
 
 export async function DELETE(request: Request) {
   const { id } = await request.json();
@@ -45,4 +58,19 @@ export async function DELETE(request: Request) {
   } else {
     return NextResponse.json({ error: 'Campaign not found' }, { status: 404 });
   }
+}
+
+export async function POST(request: Request) {
+  const newCampaign = await request.json();
+  const campaigns = await readDataFromFile();
+  const newId = (parseInt(campaigns[campaigns.length - 1]?.id || '0') + 1).toString();
+  newCampaign.id = newId;
+  newCampaign.createdAt = new Date().toISOString();
+
+  const today = new Date().toISOString().split('T')[0];
+  newCampaign.status = newCampaign.endDate < today ? 'expirada' : 'ativa';
+
+  campaigns.push(newCampaign);
+  await writeDataToFile(campaigns);
+  return NextResponse.json(newCampaign);
 }

@@ -1,8 +1,9 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { createCampaign } from '../../services/campaignService';
+import { getCategories } from '../../services/categoryService';
 import Layout from '../../components/Layout';
 import styles from './campaign.module.css';
 
@@ -11,19 +12,39 @@ const NewCampaignForm: React.FC = () => {
   const [status, setStatus] = useState('ativa');
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
+  const [category, setCategory] = useState('');
+  const [categories, setCategories] = useState<{ id: number; name: string }[]>([]);
   const router = useRouter();
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      const categories = await getCategories();
+      setCategories(categories);
+    };
+
+    fetchCategories();
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    const today = new Date().toISOString().split('T')[0];
+    const status = endDate < today ? 'expirada' : 'ativa';
+
     const newCampaign = {
       name,
       status,
       startDate,
       endDate,
+      category,
     };
 
     await createCampaign(newCampaign);
     router.push('/campaign');
+  };
+
+  const handleCancel = () => {
+    router.back();
   };
 
   return (
@@ -65,7 +86,23 @@ const NewCampaignForm: React.FC = () => {
               required
             />
           </div>
+          <div>
+            <label>Categoria:</label>
+            <select value={category} onChange={(e) => setCategory(e.target.value)} required>
+              <option value="" disabled>Selecione uma categoria</option>
+              {categories.map((cat) => (
+                <option key={cat.id} value={cat.name}>{cat.name}</option>
+              ))}
+            </select>
+          </div>
           <button type="submit">Criar Campanha</button>
+          <button
+            type="button"
+            className={styles.cancelButton}
+            onClick={handleCancel}
+          >
+            Cancelar
+          </button>
         </form>
       </div>
     </Layout>
