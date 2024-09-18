@@ -16,7 +16,7 @@ export const getCampaignById = async (id: string) => {
 
 export const createCampaign = async (data: any) => {
   const today = new Date().toISOString().split('T')[0];
-  const status = data.endDate < today ? 'expirada' : 'ativa';
+  const status = data.endDate < today ? 'Expirada' : 'Ativa';
 
   const response = await fetch('/api/campaigns', {
     method: 'POST',
@@ -42,11 +42,11 @@ export const updateCampaign = async (id: string, data: any) => {
   let updatedStatus = data.status;
 
   if (data.endDate < today) {
-    updatedStatus = 'expirada';
-  } else if (data.status === 'pausada' && data.endDate >= today) {
-    updatedStatus = 'pausada';
-  } else if (data.status === 'ativa' && data.endDate >= today) {
-    updatedStatus = 'ativa';
+    updatedStatus = 'Expirada';
+  } else if (data.status === 'Pausada' && data.endDate >= today) {
+    updatedStatus = 'Pausada';
+  } else if (data.status === 'Ativa' && data.endDate >= today) {
+    updatedStatus = 'Ativa';
   }
 
   const response = await fetch(`/api/campaign/${id}`, {

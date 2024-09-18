@@ -29,11 +29,11 @@ export async function PUT(request: Request) {
     let updatedStatus = updateData.status;
 
     if (updateData.endDate < today) {
-      updatedStatus = 'expirada';
-    } else if (updateData.status === 'pausada' && updateData.endDate >= today) {
-      updatedStatus = 'pausada';
-    } else if (updateData.status === 'ativa' && updateData.endDate >= today) {
-      updatedStatus = 'ativa';
+      updatedStatus = 'Expirada';
+    } else if (updateData.status === 'Pausada' && updateData.endDate >= today) {
+      updatedStatus = 'Pausada';
+    } else if (updateData.status === 'Ativa' && updateData.endDate >= today) {
+      updatedStatus = 'Ativa';
     }
 
     campaigns[index] = { ...campaigns[index], ...updateData, status: updatedStatus };
@@ -68,7 +68,7 @@ export async function POST(request: Request) {
   newCampaign.createdAt = new Date().toISOString();
 
   const today = new Date().toISOString().split('T')[0];
-  newCampaign.status = newCampaign.endDate < today ? 'expirada' : 'ativa';
+  newCampaign.status = newCampaign.endDate < today ? 'Expirada' : 'Ativa';
 
   campaigns.push(newCampaign);
   await writeDataToFile(campaigns);

@@ -44,7 +44,7 @@ const NewCampaignForm: React.FC = () => {
 
     const newCampaign = {
       name,
-      status: 'ativa',
+      status: 'Ativa',
       startDate,
       endDate,
       category,
@@ -72,7 +72,7 @@ const NewCampaignForm: React.FC = () => {
           <ul>
             <li>A data de início não pode ser menor que a data atual.</li>
             <li>A data de fim deve ser maior que a data de início.</li>
-            <li>O status será automaticamente definido como "ativa".</li>
+            <li>O status será automaticamente definido como "Ativa".</li>
           </ul>
         </div>
 
@@ -88,8 +88,8 @@ const NewCampaignForm: React.FC = () => {
           </div>
           <div>
             <label>Status:</label>
-            <select value="ativa" disabled>
-              <option value="ativa">Ativa</option>
+            <select value="Ativa" disabled>
+              <option value="Ativa">Ativa</option>
             </select>
           </div>
           <div>

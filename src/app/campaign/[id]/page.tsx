@@ -19,7 +19,7 @@ const CampaignDetails: React.FC = () => {
   const router = useRouter();
   const [campaign, setCampaign] = useState<any>(null);
   const [name, setName] = useState('');
-  const [status, setStatus] = useState('ativa');
+  const [status, setStatus] = useState('Ativa');
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [category, setCategory] = useState('');
@@ -33,7 +33,7 @@ const CampaignDetails: React.FC = () => {
         const data = await getCampaignById(id as string);
         if (data) {
           const today = new Date().toISOString().split('T')[0];
-          const isExpired = data.endDate < today ? 'expirada' : data.status;
+          const isExpired = data.endDate < today ? 'Expirada' : data.status;
           setCampaign({
             ...data,
             status: isExpired,
@@ -65,10 +65,10 @@ const CampaignDetails: React.FC = () => {
       let updatedStatus = status;
 
       if (endDate < today) {
-        updatedStatus = 'expirada';
+        updatedStatus = 'Expirada';
       } else if (endDate >= today) {
-        if (status === 'expirada') {
-          updatedStatus = 'ativa';
+        if (status === 'Expirada') {
+          updatedStatus = 'Ativa';
         }
       }
 
@@ -80,7 +80,7 @@ const CampaignDetails: React.FC = () => {
     e.preventDefault();
     if (isFormDirty) {
       const today = new Date().toISOString().split('T')[0];
-      const updatedStatus = endDate < today ? 'expirada' : status;
+      const updatedStatus = endDate < today ? 'Expirada' : status;
 
       const updatedCampaign = {
         id: id as string,
@@ -99,10 +99,10 @@ const CampaignDetails: React.FC = () => {
 
   const handlePauseResume = async () => {
     const today = new Date().toISOString().split('T')[0];
-    let updatedStatus = status === 'ativa' ? 'pausada' : 'ativa';
+    let updatedStatus = status === 'Ativa' ? 'Pausada' : 'Ativa';
 
     if (endDate < today) {
-      updatedStatus = 'expirada';
+      updatedStatus = 'Expirada';
     }
 
     const updatedCampaign = {
@@ -233,7 +233,7 @@ const CampaignDetails: React.FC = () => {
               </>
             ) : (
               <>
-                {status === 'ativa' ? (
+                {status === 'Ativa' ? (
                   <button type="button" aria-label="Pausar" title="Pausar campanha" onClick={handlePauseResume}>
                     <PauseIcon style={{ color: '#100e33' }} />
                   </button>

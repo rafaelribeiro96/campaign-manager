@@ -2,7 +2,7 @@
   {
     "id": "1",
     "name": "Campanha de Verão",
-    "status": "pausada",
+    "status": "Pausada",
     "startDate": "2024-01-01",
     "endDate": "2024-11-30",
     "createdAt": "2024-01-01T13:00:00Z",
@@ -11,7 +11,7 @@
   {
     "id": "2",
     "name": "Campanha de Inverno",
-    "status": "expirada",
+    "status": "Expirada",
     "startDate": "2023-06-01",
     "endDate": "2024-07-25",
     "createdAt": "2023-06-01T10:20:00Z",
@@ -20,7 +20,7 @@
   {
     "id": "3",
     "name": "Campanha de Outono",
-    "status": "expirada",
+    "status": "Expirada",
     "startDate": "2023-09-01",
     "endDate": "2023-10-30",
     "createdAt": "2023-09-01T12:30:00Z",
@@ -29,37 +29,109 @@
   {
     "id": "4",
     "name": "Campanha de Primavera",
-    "status": "expirada",
+    "status": "Expirada",
     "startDate": "2024-01-01",
     "endDate": "2024-08-31",
     "createdAt": "2024-12-01T14:45:00Z",
     "category": "Operações"
   },
   {
+    "id": "5",
     "name": "Campanha teste",
-    "status": "ativa",
+    "status": "Ativa",
     "startDate": "2024-01-01",
     "endDate": "2024-10-31",
     "category": "Marketing",
-    "createdAt": "2024-09-18T17:56:02.688Z",
-    "id": "5"
+    "createdAt": "2024-09-18T17:56:02.688Z"
   },
   {
+    "id": "6",
     "name": "Campanha Venda de Site",
-    "status": "ativa",
+    "status": "Ativa",
     "startDate": "2024-10-01",
     "endDate": "2024-10-10",
     "category": "Vendas",
-    "createdAt": "2024-09-18T19:02:10.993Z",
-    "id": "6"
+    "createdAt": "2024-09-18T19:02:10.993Z"
   },
   {
+    "id": "7",
     "name": "Campanha Primavera-Verão",
-    "status": "ativa",
-    "startDate": "2024-09-18",
-    "endDate": "2024-09-30",
+    "status": "Expirada",
+    "startDate": "2024-08-18",
+    "endDate": "2024-08-30",
     "category": "Vendas",
-    "createdAt": "2024-09-18T20:34:36.895Z",
-    "id": "7"
+    "createdAt": "2024-09-18T20:34:36.895Z"
+  },
+  {
+    "id": "8",
+    "name": "Campanha Tecnologia 2024",
+    "status": "Ativa",
+    "startDate": "2024-05-01",
+    "endDate": "2024-12-31",
+    "category": "Tecnologia",
+    "createdAt": "2024-09-10T09:00:00Z"
+  },
+  {
+    "id": "9",
+    "name": "Campanha Operações X",
+    "status": "Pausada",
+    "startDate": "2024-02-01",
+    "endDate": "2024-09-30",
+    "category": "Operações",
+    "createdAt": "2024-07-01T12:00:00Z"
+  },
+  {
+    "id": "10",
+    "name": "Campanha Vendas de Fim de Ano",
+    "status": "Ativa",
+    "startDate": "2024-11-01",
+    "endDate": "2024-12-31",
+    "category": "Vendas",
+    "createdAt": "2024-09-15T15:00:00Z"
+  },
+  {
+    "id": "11",
+    "name": "Campanha Verão 2025",
+    "status": "Pausada",
+    "startDate": "2025-01-01",
+    "endDate": "2025-06-30",
+    "category": "Marketing",
+    "createdAt": "2024-09-16T11:00:00Z"
+  },
+  {
+    "id": "12",
+    "name": "Campanha Nova Tecnologia",
+    "status": "Ativa",
+    "startDate": "2024-09-01",
+    "endDate": "2024-12-31",
+    "category": "Tecnologia",
+    "createdAt": "2024-09-17T14:00:00Z"
+  },
+  {
+    "id": "13",
+    "name": "Campanha Black Friday",
+    "status": "Ativa",
+    "startDate": "2024-11-01",
+    "endDate": "2024-11-30",
+    "category": "Vendas",
+    "createdAt": "2024-09-17T16:00:00Z"
+  },
+  {
+    "id": "14",
+    "name": "Campanha Operações 2024",
+    "status": "Pausada",
+    "startDate": "2024-03-01",
+    "endDate": "2024-09-30",
+    "category": "Operações",
+    "createdAt": "2024-09-18T08:00:00Z"
+  },
+  {
+    "id": "15",
+    "name": "Campanha Fim de Ano 2024",
+    "status": "Ativa",
+    "startDate": "2024-12-01",
+    "endDate": "2024-12-31",
+    "category": "Marketing",
+    "createdAt": "2024-09-18T10:00:00Z"
   }
 ]

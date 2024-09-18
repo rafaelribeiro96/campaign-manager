@@ -39,7 +39,7 @@ const HomePage: React.FC = () => {
           className={styles.button}
           onClick={() => handleNavigate('/campaign')}
         >
-          Ver Campanhas
+          Gerenciar Campanhas
         </button>
         <button
           className={styles.button}

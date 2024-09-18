@@ -28,6 +28,9 @@ const CampaignList: React.FC = () => {
   const [sortOption, setSortOption] = useState('');
   const [sortDirection, setSortDirection] = useState('asc');
   const router = useRouter();
+  const [currentPage, setCurrentPage] = useState(1);
+  const campaignsPerPage = 12;
+
 
   useEffect(() => {
     const fetchCampaigns = async () => {
@@ -55,6 +58,26 @@ const CampaignList: React.FC = () => {
     fetchCampaigns();
     fetchCategories();
   }, []);
+
+  const indexOfLastCampaign = currentPage * campaignsPerPage;
+  const indexOfFirstCampaign = indexOfLastCampaign - campaignsPerPage;
+  const currentCampaigns = filteredCampaigns.slice(indexOfFirstCampaign, indexOfLastCampaign);
+
+  const totalPages = Math.ceil(filteredCampaigns.length / campaignsPerPage);
+
+  const nextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const prevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+
 
   const applyFilter = () => {
     const filtered = campaigns.filter((campaign) => {
@@ -137,9 +160,9 @@ const CampaignList: React.FC = () => {
               Filtrar status:
               <select value={selectedStatus} onChange={(e) => setSelectedStatus(e.target.value)}>
                 <option value="">Todos</option>
-                <option value="ativa">Ativa</option>
-                <option value="pausada">Pausada</option>
-                <option value="expirada">Expirada</option>
+                <option value="Ativa">Ativa</option>
+                <option value="Pausada">Pausada</option>
+                <option value="Expirada">Expirada</option>
               </select>
             </label>
 
@@ -169,8 +192,8 @@ const CampaignList: React.FC = () => {
           <p>Carregando campanhas...</p>
         ) : error ? (
           <p>{error}</p>
-        ) : filteredCampaigns.length > 0 ? (
-          filteredCampaigns.map((campaign) => (
+        ) : currentCampaigns.length > 0 ? (
+          currentCampaigns.map((campaign) => (
             <CampaignCard
               key={campaign.id}
               campaign={campaign}
@@ -181,6 +204,26 @@ const CampaignList: React.FC = () => {
           <p>Nenhuma campanha disponível.</p>
         )}
       </div>
+
+      <div className={styles.pagination}>
+        {currentPage > 1 && (
+          <button onClick={prevPage}>
+            Anterior
+          </button>
+        )}
+        <span>
+          Página {currentPage} de {totalPages}
+        </span>
+        {currentPage < totalPages && (
+          <button onClick={nextPage}>
+            Próxima
+          </button>
+        )}
+      </div>
+
+
+
+
     </div>
   );
 };

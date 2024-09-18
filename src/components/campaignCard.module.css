@@ -1,4 +1,3 @@
-/* Estrutura geral do card */
 .cardContainer {
   background-color: #fff;
   border-radius: 10px;
@@ -15,15 +14,12 @@
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
-/* Cabeçalho do card */
 .cardHeader {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 15px;
 }
-
-/* Título da campanha */
 .cardTitle {
   font-size: 1.5rem;
   font-weight: bold;
@@ -31,7 +27,6 @@
   margin: 0;
 }
 
-/* Status da campanha */
 .status {
   padding: 5px 10px;
   border-radius: 5px;
@@ -40,7 +35,6 @@
   text-transform: capitalize;
 }
 
-/* Cores de status */
 .status.ativa {
   background-color: #d4edda;
   color: #155724;
@@ -67,7 +61,6 @@
   line-height: 1.6;
 }
 
-/* Negrito para textos importantes */
 .cardContent p strong {
   color: #333;
 }
