@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import React, { useEffect, useState } from "react";
-import CampaignCard from "../../components/CampaignCard";
-import { getCampaigns } from "../../services/campaignService";
-import { useRouter } from "next/navigation";
+import React, { useEffect, useState } from 'react';
+import CampaignCard from '../../components/CampaignCard';
+import { getCampaigns } from '../../services/campaignService';
+import { useRouter } from 'next/navigation';
 
 interface Campaign {
   id: string;

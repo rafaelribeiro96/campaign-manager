@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 type Campaign = {
   id: string;
@@ -17,10 +17,10 @@ const CampaignCard: React.FC<CampaignCardProps> = ({ campaign, onClick }) => {
   return (
     <div
       style={{
-        border: "1px solid #ccc",
-        padding: "10px",
-        marginBottom: "10px",
-        cursor: "pointer",
+        border: '1px solid #ccc',
+        padding: '10px',
+        marginBottom: '10px',
+        cursor: 'pointer',
       }}
       onClick={onClick}
     >
