@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import CampaignCard from '../../components/CampaignCard';
 import { getCampaigns } from '../../services/campaignService';
 import { useRouter } from 'next/navigation';
+import styles from './campaign.module.css';
 
 interface Campaign {
   id: string;
@@ -31,7 +32,7 @@ const CampaignList: React.FC = () => {
   };
 
   return (
-    <div>
+    <div className={styles.campaignList}>
       {campaigns.length > 0 ? (
         campaigns.map((campaign) => (
           <CampaignCard

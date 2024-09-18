@@ -1,18 +1,41 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
+import React from 'react';
+import styles from './page.module.css';
 
-export default function HomePage() {
+const HomePage: React.FC = () => {
   const router = useRouter();
 
-  useEffect(() => {
-    router.push('/campaign');
-  }, [router]);
+  const handleNavigate = (path: string) => {
+    router.push(path);
+  };
 
   return (
-    <div>
-      <p>Redirecionando para a lista de campanhas...</p>
+    <div className={styles.container}>
+      <header className={styles.header}>
+        <h1>Bem-vindo ao Gerenciador de Campanhas</h1>
+        <p>
+          Gerencie suas campanhas de forma fácil e eficiente com nossa
+          aplicação.
+        </p>
+      </header>
+      <div className={styles.buttonContainer}>
+        <button
+          className={styles.button}
+          onClick={() => handleNavigate('/campaign')}
+        >
+          Ver Campanhas
+        </button>
+        <button
+          className={styles.button}
+          onClick={() => handleNavigate('/campaign/new')}
+        >
+          Criar Nova Campanha
+        </button>
+      </div>
     </div>
   );
-}
+};
+
+export default HomePage;

@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { createCampaign } from '../../services/campaignService';
 import Layout from '../../components/Layout';
+import styles from './campaign.module.css';
 
 const NewCampaignForm: React.FC = () => {
   const [name, setName] = useState('');
@@ -27,44 +28,46 @@ const NewCampaignForm: React.FC = () => {
 
   return (
     <Layout>
-      <h2>Criar Nova Campanha</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Nome:</label>
-          <input
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label>Status:</label>
-          <select value={status} onChange={(e) => setStatus(e.target.value)}>
-            <option value="ativa">Ativa</option>
-            <option value="expirada">Expirada</option>
-          </select>
-        </div>
-        <div>
-          <label>Data de Início:</label>
-          <input
-            type="date"
-            value={startDate}
-            onChange={(e) => setStartDate(e.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label>Data de Fim:</label>
-          <input
-            type="date"
-            value={endDate}
-            onChange={(e) => setEndDate(e.target.value)}
-            required
-          />
-        </div>
-        <button type="submit">Criar Campanha</button>
-      </form>
+      <div className={styles.formContainer}>
+        <h2>Criar Nova Campanha</h2>
+        <form onSubmit={handleSubmit}>
+          <div>
+            <label>Nome:</label>
+            <input
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+            />
+          </div>
+          <div>
+            <label>Status:</label>
+            <select value={status} onChange={(e) => setStatus(e.target.value)}>
+              <option value="ativa">Ativa</option>
+              <option value="expirada">Expirada</option>
+            </select>
+          </div>
+          <div>
+            <label>Data de Início:</label>
+            <input
+              type="date"
+              value={startDate}
+              onChange={(e) => setStartDate(e.target.value)}
+              required
+            />
+          </div>
+          <div>
+            <label>Data de Fim:</label>
+            <input
+              type="date"
+              value={endDate}
+              onChange={(e) => setEndDate(e.target.value)}
+              required
+            />
+          </div>
+          <button type="submit">Criar Campanha</button>
+        </form>
+      </div>
     </Layout>
   );
 };

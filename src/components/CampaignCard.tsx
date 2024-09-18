@@ -1,4 +1,5 @@
 import React from 'react';
+import { format, parseISO } from 'date-fns';
 
 type Campaign = {
   id: string;
@@ -26,8 +27,8 @@ const CampaignCard: React.FC<CampaignCardProps> = ({ campaign, onClick }) => {
     >
       <h3>{campaign.name}</h3>
       <p>Status: {campaign.status}</p>
-      <p>Início: {new Date(campaign.startDate).toLocaleDateString()}</p>
-      <p>Fim: {new Date(campaign.endDate).toLocaleDateString()}</p>
+      <p>Início: {format(parseISO(campaign.startDate), 'dd/MM/yyyy')}</p>
+      <p>Fim: {format(parseISO(campaign.endDate), 'dd/MM/yyyy')}</p>
     </div>
   );
 };

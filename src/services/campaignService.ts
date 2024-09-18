@@ -1,65 +1,57 @@
-let campaignsMock = [
-  {
-    id: '1',
-    name: 'Campanha de Verão',
-    status: 'ativa',
-    startDate: '2024-01-01T00:00:00Z',
-    endDate: '2024-01-31T23:59:59Z',
-  },
-  {
-    id: '2',
-    name: 'Campanha de Inverno',
-    status: 'expirada',
-    startDate: '2023-06-01T00:00:00Z',
-    endDate: '2023-06-30T23:59:59Z',
-  },
-  {
-    id: '3',
-    name: 'Campanha de Outono',
-    status: 'ativa',
-    startDate: '2023-09-01T00:00:00Z',
-    endDate: '2023-09-30T23:59:59Z',
-  },
-  {
-    id: '4',
-    name: 'Campanha de Primavera',
-    status: 'ativa',
-    startDate: '2023-12-01T00:00:00Z',
-    endDate: '2023-12-31T23:59:59Z',
-  },
-];
-
 export const getCampaigns = async () => {
-  return campaignsMock;
+  const response = await fetch('/api/campaigns');
+  if (!response.ok) {
+    throw new Error('Failed to fetch campaigns');
+  }
+  return response.json();
 };
 
 export const getCampaignById = async (id: string) => {
-  return campaignsMock.find((campaign) => campaign.id === id);
+  const response = await fetch(`/api/campaign/${id}`);
+  if (!response.ok) {
+    throw new Error('Failed to fetch campaign');
+  }
+  return response.json();
 };
 
 export const createCampaign = async (data: any) => {
-  const newId = (
-    parseInt(campaignsMock[campaignsMock.length - 1].id) + 1
-  ).toString();
-  const newCampaign = { id: newId, ...data };
-  campaignsMock.push(newCampaign);
-  return newCampaign;
+  const response = await fetch('/api/campaigns', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  });
+  if (!response.ok) {
+    throw new Error('Failed to create campaign');
+  }
+  return response.json();
 };
 
 export const updateCampaign = async (id: string, data: any) => {
-  const index = campaignsMock.findIndex((campaign) => campaign.id === id);
-  if (index !== -1) {
-    campaignsMock[index] = { ...campaignsMock[index], ...data };
-    return campaignsMock[index];
+  const response = await fetch(`/api/campaign/${id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  });
+  if (!response.ok) {
+    throw new Error('Failed to update campaign');
   }
-  return null;
+  return response.json();
 };
 
 export const deleteCampaign = async (id: string) => {
-  const index = campaignsMock.findIndex((campaign) => campaign.id === id);
-  if (index !== -1) {
-    const [deletedCampaign] = campaignsMock.splice(index, 1);
-    return deletedCampaign;
+  const response = await fetch(`/api/campaign/${id}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ id }),
+  });
+  if (!response.ok) {
+    throw new Error('Failed to delete campaign');
   }
-  return null;
+  return response.json();
 };
