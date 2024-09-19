@@ -58,7 +58,15 @@ npm run build
 
 Este comando irá gerar uma versão otimizada para produção na pasta `.next`.
 
-### 5. Rodar Testes Unitários
+### 5. Executar versão otimizada do Projeto após realizar a Build (Etapa 4)
+
+```bash
+npm start
+```
+
+Abra [http://localhost:3000](http://localhost:3000) no navegador para ver a aplicação em funcionamento otimizada para versão de produção.
+
+### 6. Rodar Testes Unitários
 
 ```bash
 npm run test
@@ -66,7 +74,7 @@ npm run test
 
 Os testes estão configurados com Jest. Eles cobrem os componentes principais e as validações do formulário de campanhas.
 
-### 6. Verificar Cobertura de Testes
+### 7. Verificar Cobertura de Testes
 
 ```bash
 npm run test:coverage
@@ -78,34 +86,33 @@ Este comando executa os testes e gera um relatório de cobertura de código.
 
 ├── app
 
-│   ├── tests                 # Testes unitários
+│ ├── tests # Testes unitários
 
-│   ├── about                 # Página "Sobre"
+│ ├── about # Página "Sobre"
 
-│   ├── api                   # Endpoints da API
+│ ├── api # Endpoints da API
 
-│   ├── campaign              # Páginas e componentes de campanhas
+│ ├── campaign # Páginas e componentes de campanhas
 
-│   ├── globals.css           # Estilos globais
+│ ├── globals.css # Estilos globais
 
-│   ├── layout.tsx            # Layout principal
+│ ├── layout.tsx # Layout principal
 
-│   └── page.tsx              # Página inicial
+│ └── page.tsx # Página inicial
 
-├── components                # Componentes reutilizáveis
+├── components # Componentes reutilizáveis
 
-├── data                      # Dados mockados (campanhas e categorias)
+├── data # Dados mockados (campanhas e categorias)
 
-├── services                  # Serviços para API e utilitários
+├── services # Serviços para API e utilitários
 
-├── .eslintrc.json            # Configuração do ESLint
+├── .eslintrc.json # Configuração do ESLint
 
-├── jest.config.js            # Configuração do Jest
+├── jest.config.js # Configuração do Jest
 
-├── package.json              # Dependências e scripts do projeto
+├── package.json # Dependências e scripts do projeto
 
-└── README.md                 # Documentação do projeto
-
+└── README.md # Documentação do projeto
 
 ### Explicação das Pastas
 
