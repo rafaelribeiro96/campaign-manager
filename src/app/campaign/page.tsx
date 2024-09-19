@@ -5,17 +5,12 @@ import { useRouter } from 'next/navigation';
 import Layout from '../../components/Layout';
 import CampaignList from './CampaignList';
 import styles from './campaign.module.css';
-import { ArrowBack } from '@mui/icons-material';
 
 const CampaignPage: React.FC = () => {
   const router = useRouter();
 
   const handleNewCampaignClick = () => {
     router.push('/campaign/new');
-  };
-
-  const handleBackClick = () => {
-    router.push('/');
   };
 
   return (

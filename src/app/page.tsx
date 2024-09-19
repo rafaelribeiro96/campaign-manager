@@ -12,7 +12,6 @@ const HomePage: React.FC = () => {
       try {
         const response = await fetch('/api/verifyExpiredCampaigns');
         const result = await response.json();
-        console.log(result.message || result.error);
       } catch (error) {
         console.error('Erro ao verificar campanhas expiradas:', error);
       }
@@ -34,9 +33,6 @@ const HomePage: React.FC = () => {
           <button className={styles.button} onClick={() => handleNavigate('/campaign')}>
             Gerenciar Campanhas
           </button>
-          {/* <button className={styles.button} onClick={() => handleNavigate('/campaign/new')}>
-            Criar Nova Campanha
-          </button> */}
         </div>
       </header>
       <img src="/images/bannersite.avif" alt="Campaign Manager Banner" className={styles.bannerImage} />

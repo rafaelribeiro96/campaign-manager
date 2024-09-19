@@ -23,7 +23,11 @@ const CampaignCard: React.FC<CampaignCardProps> = ({ campaign, onClick }) => {
     : 'Data não disponível';
 
   return (
-    <div className={Styles.cardContainer} onClick={onClick}>
+    <div
+      className={Styles.cardContainer}
+      onClick={onClick}
+      data-testid="card-container"
+    >
       <div className={Styles.cardHeader}>
         <h3 className={Styles.cardTitle}>{campaign.name}</h3>
         <span className={`${Styles.status} ${Styles[campaign.status.toLowerCase()]}`}>

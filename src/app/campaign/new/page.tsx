@@ -1,3 +1,4 @@
+// src/app/campaign/new/page.tsx
 'use client';
 
 import React, { useEffect, useState } from 'react';
@@ -78,8 +79,9 @@ const NewCampaignForm: React.FC = () => {
 
         <form onSubmit={handleSubmit}>
           <div>
-            <label>Nome:</label>
+            <label htmlFor="name">Nome:</label>
             <input
+              id="name"
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
@@ -87,14 +89,15 @@ const NewCampaignForm: React.FC = () => {
             />
           </div>
           <div>
-            <label>Status:</label>
-            <select value="Ativa" disabled>
+            <label htmlFor="status">Status:</label>
+            <select id="status" value="Ativa" disabled>
               <option value="Ativa">Ativa</option>
             </select>
           </div>
           <div>
-            <label>Data de Início:</label>
+            <label htmlFor="startDate">Data de Início:</label>
             <input
+              id="startDate"
               type="date"
               value={startDate}
               onChange={(e) => setStartDate(e.target.value)}
@@ -102,8 +105,9 @@ const NewCampaignForm: React.FC = () => {
             />
           </div>
           <div>
-            <label>Data de Fim:</label>
+            <label htmlFor="endDate">Data de Fim:</label>
             <input
+              id="endDate"
               type="date"
               value={endDate}
               onChange={(e) => setEndDate(e.target.value)}
@@ -111,8 +115,8 @@ const NewCampaignForm: React.FC = () => {
             />
           </div>
           <div>
-            <label>Categoria:</label>
-            <select value={category} onChange={(e) => setCategory(e.target.value)} required>
+            <label htmlFor="category">Categoria:</label>
+            <select id="category" value={category} onChange={(e) => setCategory(e.target.value)} required>
               <option value="" disabled>Selecione uma categoria</option>
               {categories.map((cat) => (
                 <option key={cat.id} value={cat.name}>{cat.name}</option>
