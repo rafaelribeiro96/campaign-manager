@@ -90,6 +90,7 @@ const NewCampaignForm: React.FC = () => {
           <div>
             <label htmlFor="name">Nome:</label>
             <input
+              className={styles.nameInput}
               id="name"
               type="text"
               value={name}
@@ -106,6 +107,7 @@ const NewCampaignForm: React.FC = () => {
           <div>
             <label htmlFor="startDate">Data de Início:</label>
             <input
+              className={styles.dateInput}
               id="startDate"
               type="date"
               value={startDate}
@@ -113,9 +115,10 @@ const NewCampaignForm: React.FC = () => {
               required
             />
           </div>
-          <div>
+          <div className={styles.endDateContainer}>
             <label htmlFor="endDate">Data de Fim:</label>
             <input
+              className={styles.dateInput}
               id="endDate"
               type="date"
               value={endDate}

@@ -98,3 +98,19 @@
 .footerText {
   margin: 0;
 }
+
+@media (max-width: 768px) {
+  .headerTitle {
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .navLink {
+    font-size: 1rem;
+    padding: 8px 0;
+  }
+}

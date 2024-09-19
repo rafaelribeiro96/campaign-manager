@@ -16,6 +16,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt-BR">
+      <link rel="icon" href="/favicon.png" />
+      <meta name="description" content="Aplicação para gerenciar campanhas" />
+      <meta property="og:title" content="Gerenciador de Campanhas" />
+      <meta property="og:description" content="Aplicação para gerenciar campanhas" />
+      <meta http-equiv="Cache-Control" content="max-age=3600" />
+
       <body className={inter.className}>{children}</body>
     </html>
   );

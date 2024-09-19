@@ -193,11 +193,10 @@ const CampaignList: React.FC = () => {
           <>
             {Array.from({ length: campaignsPerPage }).map((_, index) => (
               <Skeleton
+                className={styles.skeleton}
                 key={index}
                 variant="rectangular"
-                width={400}
                 height={200}
-                style={{ margin: '16px', borderRadius: '8px' }}
               />
             ))}
           </>

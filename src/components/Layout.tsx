@@ -24,7 +24,6 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           </div>
         </div>
 
-
         <nav className={styles.nav}>
           <ul className={styles.navList}>
             <li className={styles.navItem}>

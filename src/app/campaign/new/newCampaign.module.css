@@ -1,5 +1,5 @@
 .formContainer {
-  max-width: 600px;
+  max-width: 100%;
   margin: 0 auto;
   padding: 20px;
   background-color: #fff;
@@ -27,6 +27,7 @@
 .formContainer select {
   width: 100%;
   padding: 10px;
+  box-sizing: border-box;
   font-size: 1rem;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -45,7 +46,8 @@
 
 .formContainer .buttonsContainer {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  gap: 10px;
   margin-top: 20px;
 }
 
@@ -89,7 +91,27 @@
   background-color: #cccccc;
 }
 
-.error {
-  color: red;
-  margin-top: 10px;
+@media (max-width: 768px) {
+  .formContainer {
+    padding: 15px;
+  }
+
+  .formContainer h2 {
+    font-size: 1.5rem;
+  }
+
+  .formContainer input,
+  .formContainer select {
+    font-size: 0.9rem;
+  }
+
+  .formContainer .buttonsContainer {
+    flex-direction: column;
+  }
+
+  .formContainer button {
+    width: 100%;
+    padding: 12px 10px;
+  }
+
 }

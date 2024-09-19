@@ -21,9 +21,19 @@
   padding: 20px 0;
 }
 
+.skeleton {
+  margin: 16px;
+  border-radius: 8px;
+  width: 400px;
+}
+
 @media (max-width: 768px) {
   .campaignList {
     grid-template-columns: 1fr;
+  }
+
+  .skeleton {
+    width: 300px;
   }
 }
 
