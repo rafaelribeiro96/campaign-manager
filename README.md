@@ -77,20 +77,35 @@ Este comando executa os testes e gera um relatório de cobertura de código.
 ## Estrutura do Projeto
 
 ├── app
-│ ├── **tests** # Testes unitários
-│ ├── about # Página "Sobre"
-│ ├── api # Endpoints da API
-│ ├── campaign # Páginas e componentes de campanhas
-│ ├── globals.css # Estilos globais
-│ ├── layout.tsx # Layout principal
-│ └── page.tsx # Página inicial
-├── components # Componentes reutilizáveis
-├── data # Dados mockados (campanhas e categorias)
-├── services # Serviços para API e utilitários
-├── .eslintrc.json # Configuração do ESLint
-├── jest.config.js # Configuração do Jest
-├── package.json # Dependências e scripts do projeto
-└── README.md # Documentação do projeto
+
+│   ├── tests                 # Testes unitários
+
+│   ├── about                 # Página "Sobre"
+
+│   ├── api                   # Endpoints da API
+
+│   ├── campaign              # Páginas e componentes de campanhas
+
+│   ├── globals.css           # Estilos globais
+
+│   ├── layout.tsx            # Layout principal
+
+│   └── page.tsx              # Página inicial
+
+├── components                # Componentes reutilizáveis
+
+├── data                      # Dados mockados (campanhas e categorias)
+
+├── services                  # Serviços para API e utilitários
+
+├── .eslintrc.json            # Configuração do ESLint
+
+├── jest.config.js            # Configuração do Jest
+
+├── package.json              # Dependências e scripts do projeto
+
+└── README.md                 # Documentação do projeto
+
 
 ### Explicação das Pastas
 
