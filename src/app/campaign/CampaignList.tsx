@@ -6,6 +6,7 @@ import { getCampaigns } from '../../services/campaignService';
 import { getCategories } from '../../services/categoryService';
 import { useRouter } from 'next/navigation';
 import styles from './campaign.module.css';
+import { Skeleton } from '@mui/material';
 
 interface Campaign {
   id: string;
@@ -189,7 +190,17 @@ const CampaignList: React.FC = () => {
 
       <div className={styles.campaignList}>
         {loading ? (
-          <p>Carregando campanhas...</p>
+          <>
+            {Array.from({ length: campaignsPerPage }).map((_, index) => (
+              <Skeleton
+                key={index}
+                variant="rectangular"
+                width={400}
+                height={200}
+                style={{ margin: '16px', borderRadius: '8px' }}
+              />
+            ))}
+          </>
         ) : error ? (
           <p>{error}</p>
         ) : currentCampaigns.length > 0 ? (
