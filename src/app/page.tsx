@@ -3,6 +3,7 @@
 import { useRouter } from 'next/navigation';
 import React, { useEffect } from 'react';
 import styles from './page.module.css';
+import { GitHub, Instagram, LinkedIn, Twitter } from '@mui/icons-material';
 
 const HomePage: React.FC = () => {
   const router = useRouter();
@@ -27,8 +28,21 @@ const HomePage: React.FC = () => {
   return (
     <div className={styles.container}>
       <header className={styles.header}>
-        <h1>Bem-vindo ao Gerenciador de Campanhas</h1>
-        <p>Gerencie suas campanhas de forma fácil e eficiente com nossa aplicação.</p>
+        <div className={styles.headerLinks}>
+          <div className={styles.logoContainer}>
+            <img src="/images/logoawsales.avif" alt="Logo" className={styles.logo} />
+          </div>
+          <div className={styles.socialLinks}>
+            <a href="https://www.linkedin.com/in/rafaelfeliperibeiro/" className={styles.socialLink}><LinkedIn /></a>
+            <a href="https://github.com/rafaelribeiro96" className={styles.socialLink}><GitHub /></a>
+            <a href="https://rafaelribeiro96.github.io/" className={styles.socialLink}><Instagram /></a>
+          </div>
+        </div>
+        <div className={styles.titleContainer}>
+          <h1>Bem-vindo ao Gestor de Campanhas</h1>
+          <p>Gerencie suas campanhas de forma fácil e eficiente com nossa aplicação.</p>
+        </div>
+
         <div className={styles.buttonContainer}>
           <button className={styles.button} onClick={() => handleNavigate('/campaign')}>
             Gerenciar Campanhas
@@ -65,7 +79,9 @@ const HomePage: React.FC = () => {
           </blockquote>
         </div>
       </section>
-
+      <footer className={styles.footer}>
+        <p>&copy; 2024 Gerenciamento de Campanhas. Todos os direitos reservados.</p>
+      </footer>
     </div>
   );
 };

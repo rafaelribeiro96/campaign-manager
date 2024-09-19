@@ -1,15 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Google+Sans&display=swap');
+
 .container {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
   padding: 0;
-  font-family: 'Arial', sans-serif;
+  font-family: 'Google Sans', sans-serif;
   justify-content: space-around;
 }
 
 .header {
   text-align: center;
-  background-color: #fff;
+  background-color: #40457a;
+}
+
+.headerTitle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+}
+
+.logo {
+  width: 100px;
 }
 
 .titleContainer {
@@ -18,8 +31,19 @@
 
 .title {
   font-size: 2.5rem;
-  color: #0D1358;
+  color: #ffffff;
   margin: 0;
+}
+
+.socialLinks {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.socialLink {
+  color: #ffffff;
 }
 
 .nav {

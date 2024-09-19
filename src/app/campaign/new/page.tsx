@@ -1,4 +1,3 @@
-// src/app/campaign/new/page.tsx
 'use client';
 
 import React, { useEffect, useState } from 'react';
@@ -15,6 +14,7 @@ const NewCampaignForm: React.FC = () => {
   const [category, setCategory] = useState('');
   const [categories, setCategories] = useState<{ id: number; name: string }[]>([]);
   const [error, setError] = useState('');
+  const [isFormValid, setIsFormValid] = useState(false); // Estado para controlar se o formulário é válido
   const router = useRouter();
 
   useEffect(() => {
@@ -26,22 +26,33 @@ const NewCampaignForm: React.FC = () => {
     fetchCategories();
   }, []);
 
+  // Validações de datas
+  useEffect(() => {
+    const today = new Date().toISOString().split('T')[0];
+    let formValid = true;
+
+    if (startDate && startDate < today) {
+      setError('A data de início não pode ser menor que a data atual.');
+      formValid = false;
+    } else if (endDate && endDate <= startDate) {
+      setError('A data de fim deve ser maior que a data de início.');
+      formValid = false;
+    } else {
+      setError('');
+    }
+
+    // Checa se todos os campos estão preenchidos corretamente
+    if (!name || !startDate || !endDate || !category) {
+      formValid = false;
+    }
+
+    setIsFormValid(formValid); // Atualiza o estado de validade do formulário
+  }, [name, startDate, endDate, category]);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const today = new Date().toISOString().split('T')[0];
-
-    if (startDate < today) {
-      setError('A data de início não pode ser menor que a data atual.');
-      return;
-    }
-
-    if (endDate <= startDate) {
-      setError('A data de fim deve ser maior que a data de início.');
-      return;
-    }
-
-    setError('');
+    if (!isFormValid) return;
 
     const newCampaign = {
       name,
@@ -116,21 +127,30 @@ const NewCampaignForm: React.FC = () => {
           </div>
           <div>
             <label htmlFor="category">Categoria:</label>
-            <select id="category" value={category} onChange={(e) => setCategory(e.target.value)} required>
+            <select
+              id="category"
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+              required
+            >
               <option value="" disabled>Selecione uma categoria</option>
               {categories.map((cat) => (
                 <option key={cat.id} value={cat.name}>{cat.name}</option>
               ))}
             </select>
           </div>
+
           {error && <p className={styles.error}>{error}</p>}
 
-          {/* Botões com alinhamento */}
           <div className={styles.buttonsContainer}>
             <button type="button" className={styles.cancelButton} onClick={handleCancel}>
               Cancelar
             </button>
-            <button type="submit" className={styles.newCampaignButton}>
+            <button
+              type="submit"
+              className={styles.newCampaignButton}
+              disabled={!isFormValid} // Botão desabilitado enquanto o formulário não é válido
+            >
               Criar Campanha
             </button>
           </div>

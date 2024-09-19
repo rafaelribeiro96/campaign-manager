@@ -133,5 +133,23 @@
     "endDate": "2024-12-31",
     "category": "Marketing",
     "createdAt": "2024-09-18T10:00:00Z"
+  },
+  {
+    "name": "Campeonato Mundial E-Sports",
+    "status": "Ativa",
+    "startDate": "2024-12-01",
+    "endDate": "2025-01-01",
+    "category": "Tecnologia",
+    "createdAt": "2024-09-19T15:14:48.876Z",
+    "id": "16"
+  },
+  {
+    "name": "Rock In Rio 2024",
+    "status": "Ativa",
+    "startDate": "2024-09-19",
+    "endDate": "2024-09-24",
+    "category": "Marketing",
+    "createdAt": "2024-09-19T15:17:44.807Z",
+    "id": "17"
   }
 ]

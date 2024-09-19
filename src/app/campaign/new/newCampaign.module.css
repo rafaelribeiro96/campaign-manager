@@ -73,11 +73,20 @@
 }
 
 .formContainer .newCampaignButton {
-  background-color: #28a745;
+  background-color: #387e3a;
 }
 
 .formContainer .newCampaignButton:hover {
-  background-color: #218838;
+  background-color: #245a25;
+}
+
+.formContainer button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.formContainer button:disabled:hover {
+  background-color: #cccccc;
 }
 
 .error {
