@@ -6,14 +6,14 @@ jest.mock('../../services/fileUtils', () => ({
   writeDataToFile: jest.fn(),
 }));
 
-describe('verifyExpiredCampaigns', () => {
+describe('verificarCampanhasExpiradas', () => {
   beforeEach(() => {
     jest.clearAllMocks();
     console.log = jest.fn();
     console.error = jest.fn();
   });
 
-  test('should handle errors from readDataFromFile', async () => {
+  test('deve lidar com erros ao ler dados do arquivo', async () => {
     (readDataFromFile as jest.Mock).mockRejectedValue(new Error('Erro ao ler dados'));
 
     await verifyExpiredCampaigns();
@@ -21,7 +21,7 @@ describe('verifyExpiredCampaigns', () => {
     expect(console.error).toHaveBeenCalledWith('Erro ao verificar campanhas expiradas:', new Error('Erro ao ler dados'));
   });
 
-  test('should handle errors from writeDataToFile', async () => {
+  test('deve lidar com erros ao escrever dados no arquivo', async () => {
     const campaigns = [
       { id: 1, endDate: '2023-09-10', status: 'Ativa' },
     ];

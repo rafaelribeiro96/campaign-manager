@@ -1,8 +1,8 @@
-import { getCategories } from '../../services/categoryService'; 
+import { getCategories } from '../../services/categoryService';
 import categoriesData from '../../data/categories.json';
 
 describe('getCategories', () => {
-  test('should return the correct categories data', async () => {
+  test('deve retornar os dados de categorias corretos', async () => {
     const result = await getCategories();
     expect(result).toEqual(categoriesData);
   });

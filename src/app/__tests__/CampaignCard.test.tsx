@@ -3,7 +3,7 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import CampaignCard from '../../components/CampaignCard';
 
-describe('CampaignCard', () => {
+describe('Cartão da Campanha', () => {
   const campaign = {
     id: '1',
     name: 'Campanha Teste',
@@ -14,14 +14,14 @@ describe('CampaignCard', () => {
     category: 'Categoria Teste',
   };
 
-  it('should render the campaign card with correct data', () => {
+  it('deve renderizar o cartão da campanha com os dados corretos', () => {
     render(<CampaignCard campaign={campaign} />);
     expect(screen.getByText(campaign.name)).toBeInTheDocument();
     expect(screen.getByText(campaign.status)).toBeInTheDocument();
     expect(screen.getByText(campaign.status)).toHaveClass('active');
   });
 
-  it('should call onClick handler when card is clicked', () => {
+  it('deve chamar o manipulador onClick quando o cartão for clicado', () => {
     const handleClick = jest.fn();
     render(<CampaignCard campaign={campaign} onClick={handleClick} />);
     const cardContainer = screen.getByTestId('card-container');
@@ -29,7 +29,7 @@ describe('CampaignCard', () => {
     expect(handleClick).toHaveBeenCalled();
   });
 
-  it('should render "Data não disponível" if createdAt is not provided', () => {
+  it('deve renderizar "Data não disponível" se createdAt não for fornecida', () => {
     const campaignWithoutCreatedAt = {
       ...campaign,
       createdAt: undefined,

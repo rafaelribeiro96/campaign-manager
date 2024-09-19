@@ -6,17 +6,17 @@ jest.mock('next/navigation', () => ({
   useRouter: jest.fn(),
 }));
 
-describe('HomePage', () => {
+describe('Página Inicial', () => {
   const mockPush = jest.fn();
 
   beforeEach(() => {
     (useRouter as jest.Mock).mockReturnValue({ push: mockPush });
   });
 
-  test('renders HomePage correctly', () => {
+  test('renderiza a Página Inicial corretamente', () => {
     render(<HomePage />);
 
-    expect(screen.getByText('Bem-vindo ao Gerenciador de Campanhas')).toBeInTheDocument();
+    expect(screen.getByText('Bem-vindo ao Gestor de Campanhas')).toBeInTheDocument();
     expect(screen.getByText('Gerencie suas campanhas de forma fácil e eficiente com nossa aplicação.')).toBeInTheDocument();
 
     expect(screen.getByText('Gerenciar Campanhas')).toBeInTheDocument();
@@ -28,7 +28,7 @@ describe('HomePage', () => {
     expect(screen.getByText('Suporte Dedicado')).toBeInTheDocument();
   });
 
-  test('navigates to /campaign on button click', () => {
+  test('navega para /campaign ao clicar no botão', () => {
     render(<HomePage />);
 
     fireEvent.click(screen.getByText('Gerenciar Campanhas'));

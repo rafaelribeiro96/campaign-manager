@@ -14,7 +14,7 @@ const NewCampaignForm: React.FC = () => {
   const [category, setCategory] = useState('');
   const [categories, setCategories] = useState<{ id: number; name: string }[]>([]);
   const [error, setError] = useState('');
-  const [isFormValid, setIsFormValid] = useState(false); // Estado para controlar se o formulário é válido
+  const [isFormValid, setIsFormValid] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -26,7 +26,6 @@ const NewCampaignForm: React.FC = () => {
     fetchCategories();
   }, []);
 
-  // Validações de datas
   useEffect(() => {
     const today = new Date().toISOString().split('T')[0];
     let formValid = true;
@@ -41,12 +40,11 @@ const NewCampaignForm: React.FC = () => {
       setError('');
     }
 
-    // Checa se todos os campos estão preenchidos corretamente
     if (!name || !startDate || !endDate || !category) {
       formValid = false;
     }
 
-    setIsFormValid(formValid); // Atualiza o estado de validade do formulário
+    setIsFormValid(formValid);
   }, [name, startDate, endDate, category]);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -140,7 +138,7 @@ const NewCampaignForm: React.FC = () => {
             </select>
           </div>
 
-          {error && <p className={styles.error}>{error}</p>}
+          {error && <p data-testid="start-date-error" className={styles.error}>{error}</p>}
 
           <div className={styles.buttonsContainer}>
             <button type="button" className={styles.cancelButton} onClick={handleCancel}>
@@ -149,7 +147,7 @@ const NewCampaignForm: React.FC = () => {
             <button
               type="submit"
               className={styles.newCampaignButton}
-              disabled={!isFormValid} // Botão desabilitado enquanto o formulário não é válido
+              disabled={!isFormValid}
             >
               Criar Campanha
             </button>

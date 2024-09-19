@@ -8,14 +8,14 @@ jest.mock('next/navigation', () => ({
 
 jest.mock('../campaign/CampaignList', () => () => <div data-testid="campaign-list" />);
 
-describe('CampaignPage', () => {
+describe('Página de Campanhas', () => {
   const mockPush = jest.fn();
 
   beforeEach(() => {
     (useRouter as jest.Mock).mockReturnValue({ push: mockPush });
   });
 
-  test('renders CampaignPage and the New Campaign button', () => {
+  test('renderiza a Página de Campanhas e o botão Nova Campanha', () => {
     render(<CampaignPage />);
 
     expect(screen.getByText('Nova Campanha')).toBeInTheDocument();
@@ -23,7 +23,7 @@ describe('CampaignPage', () => {
     expect(screen.getByTestId('campaign-list')).toBeInTheDocument();
   });
 
-  test('navigates to /campaign/new on button click', () => {
+  test('navega para /campaign/new ao clicar no botão', () => {
     render(<CampaignPage />);
 
     fireEvent.click(screen.getByText('Nova Campanha'));

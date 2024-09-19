@@ -11,7 +11,7 @@ import SaveIcon from '@mui/icons-material/Save';
 import CancelIcon from '@mui/icons-material/Cancel';
 import PauseIcon from '@mui/icons-material/Pause';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
-import { Skeleton } from '@mui/material'; // Importando o Skeleton do Material-UI
+import { Skeleton } from '@mui/material';
 import styles from './campaignDetails.module.css';
 import { ArrowBack } from '@mui/icons-material';
 
@@ -210,7 +210,7 @@ const CampaignDetails: React.FC = () => {
                   required
                 >
                   <option value="">Selecione uma categoria</option>
-                  {categories.map((cat) => (
+                  {categories.length > 0 && categories.map((cat) => (
                     <option key={cat.id} value={cat.name}>
                       {cat.name}
                     </option>

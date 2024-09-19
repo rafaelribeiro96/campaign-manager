@@ -3,16 +3,16 @@ import { render, screen } from '@testing-library/react';
 import Layout from '@/components/Layout';
 import styles from './layout.module.css';
 
-describe('Layout Component', () => {
-  test('renders header with navigation links', () => {
+describe('Componente Layout', () => {
+  test('renderiza o cabeçalho com os links de navegação', () => {
     render(
       <Layout>
-        <div>Content</div>
+        <div>Conteúdo</div>
       </Layout>
     );
 
-    expect(screen.getByText('Gerenciamento de Campanhas')).toBeInTheDocument();
-    expect(screen.getByText('Gerenciamento de Campanhas')).toHaveClass(styles.title);
+    expect(screen.getByText('Gestor de Campanhas')).toBeInTheDocument();
+    expect(screen.getByText('Gestor de Campanhas')).toHaveClass(styles.title);
 
     const homeLink = screen.getByText('Home');
     const campaignsLink = screen.getByText('Campanhas');
@@ -30,8 +30,8 @@ describe('Layout Component', () => {
     expect(aboutLink).toHaveAttribute('href', '/about');
     expect(aboutLink).toHaveClass(styles.navLink);
 
-    expect(screen.getByText('Content')).toBeInTheDocument();
-    expect(screen.getByText('Content').parentElement).toHaveClass(styles.mainContent);
+    expect(screen.getByText('Conteúdo')).toBeInTheDocument();
+    expect(screen.getByText('Conteúdo').parentElement).toHaveClass(styles.mainContent);
 
     expect(screen.getByText('© 2024 Gerenciamento de Campanhas. Todos os direitos reservados.')).toBeInTheDocument();
     expect(screen.getByText('© 2024 Gerenciamento de Campanhas. Todos os direitos reservados.')).toHaveClass(styles.footerText);

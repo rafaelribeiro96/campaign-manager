@@ -4,25 +4,24 @@ import * as campaignService from '../../services/campaignService';
 import * as categoryService from '../../services/categoryService';
 import { useRouter } from 'next/navigation';
 
-// Mock das dependências
 jest.mock('../../services/campaignService');
 jest.mock('../../services/categoryService');
 jest.mock('next/navigation', () => ({
   useRouter: jest.fn(),
 }));
 
-describe('NewCampaignForm', () => {
+describe('NovoFormulárioDeCampanha', () => {
   const mockRouter = { push: jest.fn(), back: jest.fn() };
 
   beforeEach(() => {
     (useRouter as jest.Mock).mockReturnValue(mockRouter);
     (categoryService.getCategories as jest.Mock).mockResolvedValue([
-      { id: 1, name: 'Category 1' },
-      { id: 2, name: 'Category 2' },
+      { id: 1, name: 'Categoria 1' },
+      { id: 2, name: 'Categoria 2' },
     ]);
   });
 
-  test('renders form elements', async () => {
+  test('renderiza os elementos do formulário', async () => {
     await act(async () => {
       render(<NewCampaignForm />);
     });
@@ -34,7 +33,7 @@ describe('NewCampaignForm', () => {
     expect(screen.getByLabelText('Categoria:')).toBeInTheDocument();
   });
 
-  test('displays error if start date is in the past', async () => {
+  test('exibe erro se a data de início estiver no passado', async () => {
     await act(async () => {
       render(<NewCampaignForm />);
     });
@@ -44,11 +43,11 @@ describe('NewCampaignForm', () => {
     fireEvent.click(screen.getByText('Criar Campanha'));
 
     await waitFor(() => {
-      expect(screen.getByText('A data de início não pode ser menor que a data atual.')).toBeInTheDocument();
+      expect(screen.getByTestId('start-date-error')).toBeInTheDocument();
     });
   });
 
-  test('displays error if end date is before start date', async () => {
+  test('exibe erro se a data de fim for anterior à data de início', async () => {
     await act(async () => {
       render(<NewCampaignForm />);
     });
@@ -62,7 +61,7 @@ describe('NewCampaignForm', () => {
     });
   });
 
-  test('calls router.back on cancel', async () => {
+  test('chama router.back ao cancelar', async () => {
     await act(async () => {
       render(<NewCampaignForm />);
     });

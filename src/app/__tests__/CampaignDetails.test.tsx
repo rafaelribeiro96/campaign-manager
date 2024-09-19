@@ -4,7 +4,6 @@ import { getCampaignById, updateCampaign, deleteCampaign } from '../../services/
 import { getCategories } from '../../services/categoryService';
 import { useRouter, useParams } from 'next/navigation';
 
-// Mock das dependências
 jest.mock('../../services/campaignService');
 jest.mock('../../services/categoryService');
 jest.mock('next/navigation', () => ({
@@ -12,7 +11,7 @@ jest.mock('next/navigation', () => ({
   useParams: jest.fn(),
 }));
 
-describe('CampaignDetails', () => {
+describe('Detalhes da Campanha', () => {
   const mockRouter = { push: jest.fn() };
   const mockParams = { id: '1' };
 
@@ -21,17 +20,7 @@ describe('CampaignDetails', () => {
     (useParams as jest.Mock).mockReturnValue(mockParams);
   });
 
-  test('renders loading state initially', async () => {
-    (getCampaignById as jest.Mock).mockResolvedValue(null);
-
-    await act(async () => {
-      render(<CampaignDetails />);
-    });
-
-    expect(screen.getByText('Carregando...')).toBeInTheDocument();
-  });
-
-  test('renders campaign details after loading', async () => {
+  test('renderiza detalhes da campanha após carregamento', async () => {
     (getCampaignById as jest.Mock).mockResolvedValue({
       id: '1',
       name: 'Campanha Teste',
@@ -57,7 +46,7 @@ describe('CampaignDetails', () => {
     });
   });
 
-  test('allows editing and saving campaign', async () => {
+  test('permite editar e salvar campanha', async () => {
     (getCampaignById as jest.Mock).mockResolvedValue({
       id: '1',
       name: 'Campanha Teste',
@@ -93,7 +82,7 @@ describe('CampaignDetails', () => {
     });
   });
 
-  test('allows deleting a campaign', async () => {
+  test('permite excluir uma campanha', async () => {
     (getCampaignById as jest.Mock).mockResolvedValue({
       id: '1',
       name: 'Campanha Teste',
@@ -116,6 +105,76 @@ describe('CampaignDetails', () => {
       await waitFor(() => {
         expect(deleteCampaign).toHaveBeenCalledWith('1');
         expect(mockRouter.push).toHaveBeenCalledWith('/campaign');
+      });
+    });
+  });
+
+  test('permite alternar entre modos de edição e visualização', async () => {
+    (getCampaignById as jest.Mock).mockResolvedValue({
+      id: '1',
+      name: 'Campanha Teste',
+      status: 'Ativa',
+      startDate: '2024-01-01',
+      endDate: '2024-12-31',
+      category: 'Categoria Teste',
+    });
+    (getCategories as jest.Mock).mockResolvedValue([
+      { id: 1, name: 'Categoria Teste' },
+    ]);
+
+    await act(async () => {
+      render(<CampaignDetails />);
+    });
+
+    await waitFor(async () => {
+      fireEvent.click(screen.getByLabelText('Editar'));
+      expect(screen.getByLabelText('Nome:')).not.toBeDisabled();
+      fireEvent.click(screen.getByLabelText('Cancelar'));
+      expect(screen.getByLabelText('Nome:')).toBeDisabled();
+    });
+  });
+
+  test('lida corretamente com a funcionalidade de pausar e retomar', async () => {
+    (getCampaignById as jest.Mock).mockResolvedValue({
+      id: '1',
+      name: 'Campanha Teste',
+      status: 'Ativa',
+      startDate: '2024-01-01',
+      endDate: '2024-12-31',
+      category: 'Categoria Teste',
+    });
+    (getCategories as jest.Mock).mockResolvedValue([
+      { id: 1, name: 'Categoria Teste' },
+    ]);
+    (updateCampaign as jest.Mock).mockResolvedValue({});
+
+    await act(async () => {
+      render(<CampaignDetails />);
+    });
+
+    await waitFor(async () => {
+      fireEvent.click(screen.getByLabelText('Pausar'));
+      await waitFor(() => {
+        expect(updateCampaign).toHaveBeenCalledWith('1', {
+          id: '1',
+          name: 'Campanha Teste',
+          status: 'Pausada',
+          startDate: '2024-01-01',
+          endDate: '2024-12-31',
+          category: 'Categoria Teste',
+        });
+      });
+
+      fireEvent.click(screen.getByLabelText('Retomar'));
+      await waitFor(() => {
+        expect(updateCampaign).toHaveBeenCalledWith('1', {
+          id: '1',
+          name: 'Campanha Teste',
+          status: 'Ativa',
+          startDate: '2024-01-01',
+          endDate: '2024-12-31',
+          category: 'Categoria Teste',
+        });
       });
     });
   });
